@@ -1,30 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Threading.Tasks;
+using Finastra.Hackathon.ML;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Finastra.Hackathon.Web.Models;
 
 namespace Finastra.Hackathon.Web.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+        public IActionResult Index()
+        {
+            var predictor = new TimeSeriesPredictor();
+            var model = predictor.GetValues();
+
+            return View(model);
+        }
+
+        public IActionResult Privacy()
         {
             return View();
         }
 
-        public ActionResult About()
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
         {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
