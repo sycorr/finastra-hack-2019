@@ -1,0 +1,1550 @@
+{
+	"info": {
+		"_postman_id": "41d0bcf3-3619-456f-8cae-0c1f32015547",
+		"name": "Finastra",
+		"description": "__Read-only API to browse funds.__\n\n_A fund is a legal entity, under the control of one or several portfolio managers, handling the cash of external investors._\n\nThis API allows to browse the funds managed directly by the entity (asset manager, insurance manager, pension fund, hedge fund...) and not those managed by a third party.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "B2E",
+			"item": [
+				{
+					"name": "Treasury - Benchmark",
+					"item": [
+						{
+							"name": "Set benchmark composition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7304f871-37c5-4bc3-9232-fc8dbe24bc1a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\"components\":[{\"instrumentId\":67110367,\"weight\":10.48176731},{\"instrumentId\":67110368,\"weight\":8.94739845},{\"instrumentId\":67109043,\"weight\":4.144024622},{\"instrumentId\":67746302,\"weight\":13.6774497},{\"instrumentId\":67746133,\"weight\":0.881052634},{\"instrumentId\":67918067,\"weight\":16.77373501},{\"instrumentId\":68053681,\"weight\":6.769023675},{\"instrumentId\":68054580,\"weight\":6.165431202},{\"instrumentId\":67817511,\"weight\":23.2617579},{\"instrumentId\":67818600,\"weight\":8.898359503}]}"
+								},
+								"url": {
+									"raw": "{{base_url}}/benchmarks/68420215/composition",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"benchmarks",
+										"68420215",
+										"composition"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get benchmark composition",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7304f871-37c5-4bc3-9232-fc8dbe24bc1a",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"The benchmark composition is correct\", function () {",
+											"    pm.response.to.have.body(`{\"components\":[{\"instrumentId\":67110367,\"weight\":10.48176731},{\"instrumentId\":67110368,\"weight\":8.94739845},{\"instrumentId\":67109043,\"weight\":4.144024622},{\"instrumentId\":67746302,\"weight\":13.6774497},{\"instrumentId\":67746133,\"weight\":0.881052634},{\"instrumentId\":67918067,\"weight\":16.77373501},{\"instrumentId\":68053681,\"weight\":6.769023675},{\"instrumentId\":68054580,\"weight\":6.165431202},{\"instrumentId\":67817511,\"weight\":23.2617579},{\"instrumentId\":67818600,\"weight\":8.898359503}]}`);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{APIMURL}}/investment-management/benchmarks/v1/benchmarks/68420215/composition",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"investment-management",
+										"benchmarks",
+										"v1",
+										"benchmarks",
+										"68420215",
+										"composition"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get benchmark",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cdd3564f-528a-4aaf-8875-ff4c77d7f75b",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"The benchmark is correct\", function () {",
+											"    pm.response.to.have.body(`{\"name\":\"Raise portfolio\",\"id\":68420215,\"type\":\"RelativeWeight\",\"currency\":\"EUR\"}`);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/investment-management/benchmarks/v1/benchmarks/68420215",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"investment-management",
+										"benchmarks",
+										"v1",
+										"benchmarks",
+										"68420215"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get all benchmarks",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "94d0f5f6-1252-419f-93b6-dc0df47decb4",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"pm.test(\"The number of benchmarks is correct\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData.items.length).to.eql(216);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/investment-management/benchmarks/v1/benchmarks/",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"investment-management",
+										"benchmarks",
+										"v1",
+										"benchmarks",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "5525ea85-991c-4ced-ab4c-e4413b28b904",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "49d67b0c-c616-4dbd-bb37-1cbf0773530a",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Treasury - Accounting",
+					"item": [
+						{
+							"name": "Get principles",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c1d7875f-552a-4493-b313-e42c5e173379",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APIMURL}}/investment-management/accounting/v1/principles",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"investment-management",
+										"accounting",
+										"v1",
+										"principles"
+									]
+								},
+								"description": "Get principles."
+							},
+							"response": [
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/principles",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"principles"
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/principles",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"principles"
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Successful operation.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/principles",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"principles"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"items\": [\n  {\n   \"id\": \"<string>\",\n   \"categories\": [\n    {\n     \"id\": \"<string>\"\n    },\n    {\n     \"id\": \"<string>\"\n    }\n   ]\n  },\n  {\n   \"id\": \"<string>\",\n   \"categories\": [\n    {\n     \"id\": \"<string>\"\n    },\n    {\n     \"id\": \"<string>\"\n    }\n   ]\n  }\n ]\n}"
+								},
+								{
+									"name": "Bad Request",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/principles",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"principles"
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Get tax lots",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7d0d2eab-e9f6-45a8-860d-b5ff7c4b633b",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{APIMURL}}/investment-management/accounting/v1/tax-lots?principle=IAS&fund=68090890",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"investment-management",
+										"accounting",
+										"v1",
+										"tax-lots"
+									],
+									"query": [
+										{
+											"key": "principle",
+											"value": "IAS"
+										},
+										{
+											"key": "fund",
+											"value": "68090890"
+										}
+									]
+								},
+								"description": "Get tax lots."
+							},
+							"response": [
+								{
+									"name": "Internal Server Error",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/tax-lots?principle=<string>&category=<string>&instrument=<string>&fund=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tax-lots"
+											],
+											"query": [
+												{
+													"key": "principle",
+													"value": "<string>"
+												},
+												{
+													"key": "category",
+													"value": "<string>"
+												},
+												{
+													"key": "instrument",
+													"value": "<string>"
+												},
+												{
+													"key": "fund",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Bad request.\nPrinciple or category does not exist.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/tax-lots?principle=<string>&category=<string>&instrument=<string>&fund=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tax-lots"
+											],
+											"query": [
+												{
+													"key": "principle",
+													"value": "<string>"
+												},
+												{
+													"key": "category",
+													"value": "<string>"
+												},
+												{
+													"key": "instrument",
+													"value": "<string>"
+												},
+												{
+													"key": "fund",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Successful operation.",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/tax-lots?principle=<string>&category=<string>&instrument=<string>&fund=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tax-lots"
+											],
+											"query": [
+												{
+													"key": "principle",
+													"value": "<string>"
+												},
+												{
+													"key": "category",
+													"value": "<string>"
+												},
+												{
+													"key": "instrument",
+													"value": "<string>"
+												},
+												{
+													"key": "fund",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n \"items\": [\n  {\n   \"id\": \"<string>\",\n   \"principle\": \"<string>\",\n   \"category\": \"<string>\",\n   \"instrument\": \"<string>\",\n   \"fund\": \"<string>\",\n   \"tradeDate\": \"<dateTime>\",\n   \"currency\": \"<string>\",\n   \"grossRealized\": \"<double>\",\n   \"realizedAmortization\": \"<double>\",\n   \"averagePrice\": \"<double>\",\n   \"amortizationRemainingPosition\": \"<double>\",\n   \"remainingQuantity\": \"<double>\",\n   \"provisionAmount\": \"<double>\",\n   \"reversalOfProvisionOnSoldSecurities\": \"<double>\",\n   \"provisionPrice\": \"<double>\",\n   \"inventoryPrice\": \"<double>\",\n   \"valuationPrice\": \"<double>\"\n  },\n  {\n   \"id\": \"<string>\",\n   \"principle\": \"<string>\",\n   \"category\": \"<string>\",\n   \"instrument\": \"<string>\",\n   \"fund\": \"<string>\",\n   \"tradeDate\": \"<dateTime>\",\n   \"currency\": \"<string>\",\n   \"grossRealized\": \"<double>\",\n   \"realizedAmortization\": \"<double>\",\n   \"averagePrice\": \"<double>\",\n   \"amortizationRemainingPosition\": \"<double>\",\n   \"remainingQuantity\": \"<double>\",\n   \"provisionAmount\": \"<double>\",\n   \"reversalOfProvisionOnSoldSecurities\": \"<double>\",\n   \"provisionPrice\": \"<double>\",\n   \"inventoryPrice\": \"<double>\",\n   \"valuationPrice\": \"<double>\"\n  }\n ]\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/tax-lots?principle=<string>&category=<string>&instrument=<string>&fund=<string>",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"tax-lots"
+											],
+											"query": [
+												{
+													"key": "principle",
+													"value": "<string>"
+												},
+												{
+													"key": "category",
+													"value": "<string>"
+												},
+												{
+													"key": "instrument",
+													"value": "<string>"
+												},
+												{
+													"key": "fund",
+													"value": "<string>"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "text/plain"
+										}
+									],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d8f9cc6d-1d5e-45bd-ad7a-fe2cbb9ef55b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "38796d58-66ed-4d9c-9b4e-73edd8a0a179",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Treasury - Funds",
+					"item": [
+						{
+							"name": "Get a list of available funds, optionally filtered by name.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e2589831-38d4-4753-ad62-65259db4e65b",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/investment-management/funds/v1/funds",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"investment-management",
+										"funds",
+										"v1",
+										"funds"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Fund information for a specific fund.",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "4c57ff3c-e6c6-4d8e-aa98-85e4b4cd82b9",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/investment-management/funds/v1/funds/:id",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"investment-management",
+										"funds",
+										"v1",
+										"funds",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "68090899"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Folder for funds",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "588bc6bb-cc8a-41a8-9cf6-653034d174c0",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "6a3922b8-975e-4110-901b-8c25e9697a89",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Lending - US Payment Calculations",
+					"item": [
+						{
+							"name": "FixedRateInstallmentFullyAmortizing",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"fixedRateInstallmentFullyAmortizingRequestViewModel\": {\r\n    \"calculationOptions\": {\r\n      \"interestMethod\": \"_30_360\",\r\n      \"endOfMonthOption\": \"SameDate\",\r\n      \"finalPaymentAdjustment\": \"ApproximateEqual\",\r\n      \"finalPaymentOption\": \"AdjustedToIncludeRounding\",\r\n      \"interestAccrualMethod\": \"UsRule\",\r\n      \"paymentRoundingOption\": \"NearestCent\",\r\n      \"prepaidInterestBasis\": \"TotalNoteAmount\",\r\n      \"calculateAmortizationSchedule\": \"true\"\r\n    },\r\n    \"loanInformation\": {\r\n      \"rateInformation\": {\r\n        \"interestRate\": \"4.000\"\r\n      },\r\n      \"loanAmount\": \"100000.00\",\r\n      \"disbursementDate\": \"2019-04-15T00:00:00\",\r\n      \"firstPaymentDate\": \"2019-05-15T00:00:00\",\r\n      \"financeCharges\": {\r\n        \"prepaidFinanceChargesCash\": \"100.00\",\r\n        \"otherFeesCash\": \"222.00\"\r\n      },\r\n      \"numberOfPayments\": \"4\",\r\n      \"paymentFrequency\": \"Monthly\",\r\n      \"prepaidInterestOption\": \"None\"\r\n    }\r\n  }\r\n}"
+								},
+								"url": {
+									"raw": "{{APIMURL}}/total-lending/payment-calculator-us/v1/non-trid-monthly-interest-accrual/installment/fixed-rate",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"total-lending",
+										"payment-calculator-us",
+										"v1",
+										"non-trid-monthly-interest-accrual",
+										"installment",
+										"fixed-rate"
+									]
+								},
+								"description": "Calculates payment structure for a fully amortizing Installment loan with Monthly Interest Accrual and a fixed rate"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhenhYOVlMYzQ1LThIOThBQXJhanZmeldhLWIycFEtcnI2c0w2dFlZZHpNIn0.eyJqdGkiOiIwMjZiYjlhNi1mMDRkLTQzZjQtYmMzYS0xODc0MTQxODdmMjIiLCJleHAiOjE1NzUwNjcwMTksIm5iZiI6MCwiaWF0IjoxNTc1MDYzNDE5LCJpc3MiOiJodHRwczovL2FwaS5mdXNpb25mYWJyaWMuY2xvdWQvbG9naW4vdjEiLCJhdWQiOlsiVXNQYXltZW50Q2FsY3VsYXRvci12MS03Y2I1ZDUxNS1kZWQ0LTRkMmItYWE0OS1lMWUzZGIyZDEwYTkiLCJpbnZlc3RtZW50LW1hbmFnZW1lbnQtYmVuY2htYXJrcy12MS03YmJmZDEzNC05ZmQ5LTQxNjktOWEyYi1kOWE4NWIzNjdhZGMiLCJpbnZlc3RtZW50LW1hbmFnZW1lbnQtYWNjb3VudGluZy12MS0wNTk2ZTMzZS05M2RjLTRhMTQtODRlNy0zOTY5ZTQxZmUxNWYiLCJpbnZlc3RtZW50LW1hbmFnZW1lbnQtZnVuZHMtdjEtZTgzZWJkMjUtNTQ5ZC00ODk3LWJkNDYtYWE3ZDQ5YmY1OGFmIl0sInN1YiI6ImEwNmY3NjVlLTU0ZjUtNDkyYS1iNDQzLTNhN2JiY2IyOWE3NiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImE0OWFlNDcyLWM2YzMtNDU4MC05ZDk0LTZhYjBhMjNmMjM0YSIsImF1dGhfdGltZSI6MTU3NTA2MzQxOSwic2Vzc2lvbl9zdGF0ZSI6ImQ2NDIyZDM2LWZkOTEtNGYyNi05ZjU0LWQ0ZjQ5MjBjMzI1OCIsImFjciI6IjEiLCJzY29wZSI6Im9wZW5pZCBpbnZlc3RtZW50LW1hbmFnZW1lbnQtZnVuZHMtdjEtZTgzZWJkMjUtNTQ5ZC00ODk3LWJkNDYtYWE3ZDQ5YmY1OGFmIFVzUGF5bWVudENhbGN1bGF0b3ItdjEtN2NiNWQ1MTUtZGVkNC00ZDJiLWFhNDktZTFlM2RiMmQxMGE5IGludmVzdG1lbnQtbWFuYWdlbWVudC1iZW5jaG1hcmtzLXYxLTdiYmZkMTM0LTlmZDktNDE2OS05YTJiLWQ5YTg1YjM2N2FkYyBpbnZlc3RtZW50LW1hbmFnZW1lbnQtYWNjb3VudGluZy12MS0wNTk2ZTMzZS05M2RjLTRhMTQtODRlNy0zOTY5ZTQxZmUxNWYiLCJhcHAiOiI4ZmI1MTk3Yy1jZDk0LTQxOTMtYjUyOC0xMmE5NDNkMWJmNDAiLCJpcHdoaXRlbGlzdCI6IiIsInRlbmFudCI6InNhbmRib3giLCJ1c2VybmFtZSI6ImZmZGN1c2VyMSJ9.XNaZdUy6pmkcVDIGjFtYMEQH0TmZzejR6-nmv5so-MJtgS_QQX3fCnAf1A-yrYK772p1G2-sT8MHBSD9FpM8W2G5a0Bre8NCWaVV2Sgu5pZPNkRDKyAlDyGdav1lN_SyZPnswE29o4As0uKHIZOi24cUxtDeXFQInA0hBwcIk_r2Q5thLaMkQxkfB99JUi7AEqEfdQrIbd-K0kE5OoNUMidNJI6DC1je_y8UbQhnXYxD89dD6XrzdcwjsrCUVVSfd2iZIaBchWZOLnibMK921FuXvuN9cbCGpEv-c_GSh1UCAhWCNb43e__-lP23OQQefW5m7JXbHZbthI27_dshKg",
+						"type": "string"
+					},
+					{
+						"key": "tokenType",
+						"value": "bearer",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "ff9646ae-b202-4e26-9d9e-4c3f32c4be01",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "7eb0e419-3347-4949-8cf6-e02ff383e487",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "B2C",
+			"item": [
+				{
+					"name": "Corporate Banking - Accounts and Balances",
+					"item": [
+						{
+							"name": "Display Account Balances By Account Type",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/corporate/account-information/me/v1/accounts/balances-by-account-type?accountTypeForBalance=CURRENT",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"corporate",
+										"account-information",
+										"me",
+										"v1",
+										"accounts",
+										"balances-by-account-type"
+									],
+									"query": [
+										{
+											"key": "accountTypeForBalance",
+											"value": "CURRENT"
+										}
+									]
+								},
+								"description": "AccountBalancesByType"
+							},
+							"response": []
+						},
+						{
+							"name": "Display Accounts list for the authenticated user",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/corporate/account-information/me/v1/accounts?accountContext=ViewAccount",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"corporate",
+										"account-information",
+										"me",
+										"v1",
+										"accounts"
+									],
+									"query": [
+										{
+											"key": "accountContext",
+											"value": "ViewAccount"
+										}
+									]
+								},
+								"description": "Accounts"
+							},
+							"response": []
+						},
+						{
+							"name": "Display Account Balances",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/corporate/account-information/me/v1/accounts/12/balances",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"corporate",
+										"account-information",
+										"me",
+										"v1",
+										"accounts",
+										"12",
+										"balances"
+									]
+								},
+								"description": "AccountBalances"
+							},
+							"response": []
+						},
+						{
+							"name": "Display Account Statement Details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/corporate/account-information/me/v1/accounts/12?fromDate=2019-01-01&toDate=2019-05-16",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"corporate",
+										"account-information",
+										"me",
+										"v1",
+										"accounts",
+										"12"
+									],
+									"query": [
+										{
+											"key": "fromDate",
+											"value": "2019-01-01"
+										},
+										{
+											"key": "toDate",
+											"value": "2019-05-16"
+										}
+									]
+								},
+								"description": "AccountStatement"
+							},
+							"response": []
+						},
+						{
+							"name": "Display Account Details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/corporate/account-information/me/v1/accounts/12",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"corporate",
+										"account-information",
+										"me",
+										"v1",
+										"accounts",
+										"12"
+									]
+								},
+								"description": "AccountDetails"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "3fa0c49a-93c2-423b-a903-5ab4de7cdf97",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "83287d08-dbf6-48ff-9f9b-5304792d715b",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Corporate Banking - Corporate Profile",
+					"item": [
+						{
+							"name": "Corporate Details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/corporate/profile/me/v1/corporate-details",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"corporate",
+										"profile",
+										"me",
+										"v1",
+										"corporate-details"
+									]
+								},
+								"description": "corporate-details"
+							},
+							"response": []
+						},
+						{
+							"name": "User information of the logged in user",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/corporate/profile/me/v1/user-details",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"corporate",
+										"profile",
+										"me",
+										"v1",
+										"user-details"
+									]
+								},
+								"description": "user-details"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "63ea7b41-6776-4634-ac38-372276be5a15",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "4733220c-9b05-4344-8328-bd023efc8444",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Consumer - Consumer Profile - BROKEN",
+					"item": [
+						{
+							"name": "Retrieve Account Holder Profile",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "05cc1264-e0f2-44dd-b701-00ef26f4c3d9",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{X-Request-ID}}"
+									},
+									{
+										"key": "X-IP-Address",
+										"value": "{{X-IP-Address}}"
+									},
+									{
+										"key": "X-User-Agent",
+										"value": "{{X-User-Agent}}"
+									},
+									{
+										"key": "X-Device-Type",
+										"value": "{{X-Device-Type}}"
+									},
+									{
+										"key": "X-Device-ID",
+										"value": "{{X-Device-ID}}"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/retail-us/me/v1/profile",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"retail-us",
+										"me",
+										"v1",
+										"profile"
+									]
+								},
+								"description": "Retrieve the profile for the currently logged in user."
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Account Holder Email Addresses",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "26b9166b-f4a4-455c-9439-7a403cf7d466",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{X-Request-ID}}"
+									},
+									{
+										"key": "X-IP-Address",
+										"value": "{{X-IP-Address}}"
+									},
+									{
+										"key": "X-User-Agent",
+										"value": "{{X-User-Agent}}"
+									},
+									{
+										"key": "X-Device-Type",
+										"value": "{{X-Device-Type}}"
+									},
+									{
+										"key": "X-Device-ID",
+										"value": "{{X-Device-ID}}"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/retail-us/me/v1/emails",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"retail-us",
+										"me",
+										"v1",
+										"emails"
+									]
+								},
+								"description": "Retrieve the email addresses for currently logged in consumer"
+							},
+							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2e2e191c-5d62-40bd-bbd8-a639ceac62d2",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "a44ff1bf-27a7-4c5d-a073-1bf78be4d76f",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhenhYOVlMYzQ1LThIOThBQXJhanZmeldhLWIycFEtcnI2c0w2dFlZZHpNIn0.eyJqdGkiOiIzZDdjZDY3MC03ODA0LTRkMDgtYjE2ZS1mN2Q5Njc3ODVkODAiLCJleHAiOjE1NzUwNzAyNjksIm5iZiI6MCwiaWF0IjoxNTc1MDY2NjY5LCJpc3MiOiJodHRwczovL2FwaS5mdXNpb25mYWJyaWMuY2xvdWQvbG9naW4vdjEiLCJhdWQiOlsiYjJjLXByb2ZpbGUtdjEtOTNhNmVmMjItMGFhNi00M2YxLTk2MjQtZjMzZWU4MDIyZTQ5IiwiY29ycG9yYXRlLXByb2ZpbGUtdjEtMWVjNjRkYTEtMDMyNC00OGJhLWJkZjYtN2Y0Njc4OTI2ZGI4IiwiY29ycG9yYXRlLWFjY291bnRlaW5mby1tZS12MS04MzFjYjA5ZC1jYzEwLTQ3NzItOGVkNS04YTZiNzJlYzhlMDEiXSwic3ViIjoiYTA2Zjc2NWUtNTRmNS00OTJhLWI0NDMtM2E3YmJjYjI5YTc2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYWY1NWNiNWQtZjRjMi00NWZkLTliNGEtYzBhY2ExMzdlMTUyIiwiYXV0aF90aW1lIjoxNTc1MDY2NjY4LCJzZXNzaW9uX3N0YXRlIjoiZDY0MjJkMzYtZmQ5MS00ZjI2LTlmNTQtZDRmNDkyMGMzMjU4IiwiYWNyIjoiMSIsInNjb3BlIjoib3BlbmlkIGIyYy1wcm9maWxlLXYxLTkzYTZlZjIyLTBhYTYtNDNmMS05NjI0LWYzM2VlODAyMmU0OSBjb3Jwb3JhdGUtYWNjb3VudGVpbmZvLW1lLXYxLTgzMWNiMDlkLWNjMTAtNDc3Mi04ZWQ1LThhNmI3MmVjOGUwMSBjb3Jwb3JhdGUtcHJvZmlsZS12MS0xZWM2NGRhMS0wMzI0LTQ4YmEtYmRmNi03ZjQ2Nzg5MjZkYjgiLCJhcHAiOiI4ZmI1MTk3Yy1jZDk0LTQxOTMtYjUyOC0xMmE5NDNkMWJmNDAiLCJpcHdoaXRlbGlzdCI6IiIsInRlbmFudCI6InNhbmRib3giLCJ1c2VybmFtZSI6ImZmZGN1c2VyMSJ9.EQ2cP17Yf_FPpIFoD0OVfwjAhBOL1SOppQVHa6cr1uMw7ivlPM42Z4t-6O2143wMR0w4vPEfRuKO2pIqFz9dbhh9-vHHMVTOygKcdvbo0BitmZIkI6dbzp_ZNhXXs-HyqYoe6KuLAHnIBvsuKeA5BrK_Xlanrdyp6-CVCbvSsdwtsCf2Bwe8v-3YxnLbr5bz6MdeQ_mmD8-P3PQHAv42awAe085FKfvI-86UnRRT9sE4aqg80YSd9z1HgZvy6ajoZl3oGINrYr6AdFGSrhmC_Kl_njIQnWWHPyA7QKToplmS7i7MNlqNf-ReanUREgke7ZGKiZQlOcalQ2MW-6SuNw",
+						"type": "string"
+					},
+					{
+						"key": "tokenType",
+						"value": "bearer",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0be8a956-1cf8-4f51-9706-8f938973f088",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "9af15f80-874b-4151-9927-4e4ae4e25554",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "B2B",
+			"item": [
+				{
+					"name": "Consumer - Consumer",
+					"item": [
+						{
+							"name": "Retrieve consumers based on search criteria",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{X-Request-ID}}"
+									},
+									{
+										"key": "X-Device-Type",
+										"value": "{{X-Device-Type}}"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/retail-us/customer-read/v1/consumers?userName=ffdcuser1",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"retail-us",
+										"customer-read",
+										"v1",
+										"consumers"
+									],
+									"query": [
+										{
+											"key": "firstName",
+											"value": "{{firstName}}",
+											"disabled": true
+										},
+										{
+											"key": "lastName",
+											"value": "Sally",
+											"disabled": true
+										},
+										{
+											"key": "userName",
+											"value": "ffdcuser1"
+										}
+									]
+								},
+								"description": "Perform a consumer search based on criteria"
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve consumer's profile",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-Request-ID",
+										"value": "{{X-Request-ID}}"
+									},
+									{
+										"key": "X-Device-Type",
+										"value": "{{X-Device-Type}}"
+									}
+								],
+								"url": {
+									"raw": "{{APIMURL}}/retail-us/customer-read/v1/consumers/:consumerId",
+									"host": [
+										"{{APIMURL}}"
+									],
+									"path": [
+										"retail-us",
+										"customer-read",
+										"v1",
+										"consumers",
+										":consumerId"
+									],
+									"variable": [
+										{
+											"key": "consumerId",
+											"value": "{{consumerId}}"
+										}
+									]
+								},
+								"description": "Retrieve the profile for the currently logged in user."
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"auth": {
+				"type": "oauth2",
+				"oauth2": [
+					{
+						"key": "accessToken",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhenhYOVlMYzQ1LThIOThBQXJhanZmeldhLWIycFEtcnI2c0w2dFlZZHpNIn0.eyJqdGkiOiI5M2U1M2NmNy03ZTlkLTQwM2MtOTFhZS0xMjUzNWU3NzFhODMiLCJleHAiOjE1NzUwNzEzMTYsIm5iZiI6MCwiaWF0IjoxNTc1MDY3NzE2LCJpc3MiOiJodHRwczovL2FwaS5mdXNpb25mYWJyaWMuY2xvdWQvbG9naW4vdjEiLCJhdWQiOlsiVXNQYXltZW50Q2FsY3VsYXRvci12MS03Y2I1ZDUxNS1kZWQ0LTRkMmItYWE0OS1lMWUzZGIyZDEwYTkiLCJpbnZlc3RtZW50LW1hbmFnZW1lbnQtYmVuY2htYXJrcy12MS03YmJmZDEzNC05ZmQ5LTQxNjktOWEyYi1kOWE4NWIzNjdhZGMiLCJpbnZlc3RtZW50LW1hbmFnZW1lbnQtYWNjb3VudGluZy12MS0wNTk2ZTMzZS05M2RjLTRhMTQtODRlNy0zOTY5ZTQxZmUxNWYiLCJpbnZlc3RtZW50LW1hbmFnZW1lbnQtZnVuZHMtdjEtZTgzZWJkMjUtNTQ5ZC00ODk3LWJkNDYtYWE3ZDQ5YmY1OGFmIl0sInN1YiI6ImEwNmY3NjVlLTU0ZjUtNDkyYS1iNDQzLTNhN2JiY2IyOWE3NiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImE0OWFlNDcyLWM2YzMtNDU4MC05ZDk0LTZhYjBhMjNmMjM0YSIsImF1dGhfdGltZSI6MTU3NTA2NzcxNSwic2Vzc2lvbl9zdGF0ZSI6IjY5NDhmMDFhLTM0NjgtNDFiMS1hZTA3LTAwZTBlNmU3NjJhYiIsImFjciI6IjEiLCJzY29wZSI6Im9wZW5pZCBpbnZlc3RtZW50LW1hbmFnZW1lbnQtYWNjb3VudGluZy12MS0wNTk2ZTMzZS05M2RjLTRhMTQtODRlNy0zOTY5ZTQxZmUxNWYgVXNQYXltZW50Q2FsY3VsYXRvci12MS03Y2I1ZDUxNS1kZWQ0LTRkMmItYWE0OS1lMWUzZGIyZDEwYTkgaW52ZXN0bWVudC1tYW5hZ2VtZW50LWZ1bmRzLXYxLWU4M2ViZDI1LTU0OWQtNDg5Ny1iZDQ2LWFhN2Q0OWJmNThhZiBpbnZlc3RtZW50LW1hbmFnZW1lbnQtYmVuY2htYXJrcy12MS03YmJmZDEzNC05ZmQ5LTQxNjktOWEyYi1kOWE4NWIzNjdhZGMiLCJhcHAiOiI4ZmI1MTk3Yy1jZDk0LTQxOTMtYjUyOC0xMmE5NDNkMWJmNDAiLCJpcHdoaXRlbGlzdCI6IiIsInRlbmFudCI6InNhbmRib3giLCJ1c2VybmFtZSI6ImZmZGN1c2VyMSJ9.osFDsim0lQV5L_llC2tZL57WFzBAGwqyJYkuaNnYOwNEAbDTJRJHkluDB_AqQlmIh8LJ0CT9Al7Cah1Dx4SxEWBtkDp8yMGqtrThMRE81DxrT7UNod5B8sZG03p71-PK_iZJBJfuX4rBx0zlBALlxubXlBrcX4v7v9utsIOukUUwOeccNuZkt8tVAR8_L0XFgIkJ7l5p9Mdw06DGy-Dzmq5vTjDJZTgX76JpU8PhY4cdu4Z28fVsean36V7u7-1sk-jIaJPNiXl2iD_rWsGL-7noyTCXIBBu5KbGUR8MfHv05CpJ9lYDAJJH9y6tiay3B9qzHEviimrV1SlHT00Z6w",
+						"type": "string"
+					},
+					{
+						"key": "tokenType",
+						"value": "bearer",
+						"type": "string"
+					},
+					{
+						"key": "addTokenTo",
+						"value": "header",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2b66f3c2-4c9d-4721-ae83-73affad6b034",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3bb9825c-1ba6-433c-b25d-b264aa4eed57",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhenhYOVlMYzQ1LThIOThBQXJhanZmeldhLWIycFEtcnI2c0w2dFlZZHpNIn0.eyJqdGkiOiJkNGNiMGY2Yi0xOWRjLTQ3MzgtOGNkYy1mYmJjMDU5ZGQ5ZGMiLCJleHAiOjE1NzQ4OTMxNTUsIm5iZiI6MCwiaWF0IjoxNTc0ODg5NTU1LCJpc3MiOiJodHRwczovL2FwaS5mdXNpb25mYWJyaWMuY2xvdWQvbG9naW4vdjEiLCJhdWQiOlsiaW52ZXN0bWVudC1tYW5hZ2VtZW50LWJlbmNobWFya3MtdjEtN2JiZmQxMzQtOWZkOS00MTY5LTlhMmItZDlhODViMzY3YWRjIiwiaW52ZXN0bWVudC1tYW5hZ2VtZW50LWFjY291bnRpbmctdjEtMDU5NmUzM2UtOTNkYy00YTE0LTg0ZTctMzk2OWU0MWZlMTVmIiwiaW52ZXN0bWVudC1tYW5hZ2VtZW50LWZ1bmRzLXYxLWU4M2ViZDI1LTU0OWQtNDg5Ny1iZDQ2LWFhN2Q0OWJmNThhZiJdLCJzdWIiOiJhMDZmNzY1ZS01NGY1LTQ5MmEtYjQ0My0zYTdiYmNiMjlhNzYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhNDlhZTQ3Mi1jNmMzLTQ1ODAtOWQ5NC02YWIwYTIzZjIzNGEiLCJhdXRoX3RpbWUiOjE1NzQ4ODk1NTQsInNlc3Npb25fc3RhdGUiOiJjZTE2MTJiZC02M2M4LTRlOTAtOTc5MC0zNWY3MDAzMjJlYTMiLCJhY3IiOiIxIiwic2NvcGUiOiJvcGVuaWQgaW52ZXN0bWVudC1tYW5hZ2VtZW50LWZ1bmRzLXYxLWU4M2ViZDI1LTU0OWQtNDg5Ny1iZDQ2LWFhN2Q0OWJmNThhZiBpbnZlc3RtZW50LW1hbmFnZW1lbnQtYWNjb3VudGluZy12MS0wNTk2ZTMzZS05M2RjLTRhMTQtODRlNy0zOTY5ZTQxZmUxNWYgaW52ZXN0bWVudC1tYW5hZ2VtZW50LWJlbmNobWFya3MtdjEtN2JiZmQxMzQtOWZkOS00MTY5LTlhMmItZDlhODViMzY3YWRjIiwiYXBwIjoiOGZiNTE5N2MtY2Q5NC00MTkzLWI1MjgtMTJhOTQzZDFiZjQwIiwiaXB3aGl0ZWxpc3QiOiIiLCJ0ZW5hbnQiOiJzYW5kYm94IiwidXNlcm5hbWUiOiJmZmRjdXNlcjEifQ.klwSi3ANixkItX67h8sEpa063mTNCOoMoAckoV0qkesSy3VnOHGaBqAZRiyGJC2Bvp4wi9RlkfM01NjUdykncFBkwVDnuRlpVMwlupDq76iK8X3b34EMbIHsMp3GXQj0VXv8nTTokzp5SWpWsrgwgrgnfH3Xmu6bhNORID6f0__YzOLCK-pxH1xgRz6Vd-TcXjal5-ZiaCcxfYRrTeTHxSYmynj7Rj2U741j5thvGJiB9oh5l5VFBPuLoOkJIP8ywqBd6BV7D2kUWjPyfDNdFhFGRu2PCp8H4gkIBBnodZRC7yuKVJq48LcsLzqil6j3h0OvxOEOUUG39eeX5fx46g",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "bearer",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "a4ba0a26-1361-47b7-a2de-10d307f4ba3b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "acf25212-d7f2-4ddd-9169-f8918f40fb6e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a5c74d4f-e91b-497f-be94-e88dd7f773ac",
+			"key": "APIMURL",
+			"value": "https://api.fusionfabric.cloud",
+			"type": "string"
+		},
+		{
+			"id": "0c9a11c7-1b79-4033-ae19-69d967c06ade",
+			"key": "base_url",
+			"value": "https://api.fusionfabric.cloud/investment-management/funds/v1",
+			"type": "string",
+			"disabled": true
+		}
+	],
+	"protocolProfileBehavior": {}
+}
