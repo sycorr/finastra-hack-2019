@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Finastra.Hackathon.ML\Finastra.Hackathon.ML.csproj" />
+    <ProjectReference Include="..\Finastra.Hackathon\Finastra.Hackathon.csproj" />
   </ItemGroup>
 
 </Project>

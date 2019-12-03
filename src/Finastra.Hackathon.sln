@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finastra.Hackathon.ML", "Finastra.Hackathon.ML\Finastra.Hackathon.ML.csproj", "{C602D029-69A2-4C81-A48C-9FFB5CFE85D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finastra.Hackathon.ML", "Finastra.Hackathon.ML\Finastra.Hackathon.ML.csproj", "{C602D029-69A2-4C81-A48C-9FFB5CFE85D0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finastra.Hackathon.Web", "Finastra.Hackathon.Web\Finastra.Hackathon.Web.csproj", "{EDBF5E3F-1A64-4BA6-BC56-A54D1650BBE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finastra.Hackathon.Web", "Finastra.Hackathon.Web\Finastra.Hackathon.Web.csproj", "{EDBF5E3F-1A64-4BA6-BC56-A54D1650BBE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finastra.Hackathon", "Finastra.Hackathon\Finastra.Hackathon.csproj", "{3C4B0AA2-194F-4B80-90F5-6B13E5D65CCE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EDBF5E3F-1A64-4BA6-BC56-A54D1650BBE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EDBF5E3F-1A64-4BA6-BC56-A54D1650BBE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EDBF5E3F-1A64-4BA6-BC56-A54D1650BBE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C4B0AA2-194F-4B80-90F5-6B13E5D65CCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C4B0AA2-194F-4B80-90F5-6B13E5D65CCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C4B0AA2-194F-4B80-90F5-6B13E5D65CCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C4B0AA2-194F-4B80-90F5-6B13E5D65CCE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
