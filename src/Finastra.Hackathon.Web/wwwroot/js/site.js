@@ -6,7 +6,14 @@ $(document).ready(function () {
         '#nav-toggle',
         function() {
             $('#sidebar').toggleClass('sidebar-display');
+            $('.close-sidebar')
+                .off('click')
+                .on('click',
+                    function () {
+                        $('#sidebar').toggleClass('sidebar-display');
+                    });
         });
+
 
     // listen for sidebar clicks
     $(document).on('click',
@@ -23,9 +30,6 @@ $(document).ready(function () {
     $(document).on('click',
         '.info-icon',
         function () {
-
-            console.log('showing popover');
             $(this).popover('show');
-
         });
 });
