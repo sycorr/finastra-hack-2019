@@ -5,10 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Emails\Templates\AlertLender\AlertLender.cshtml" />
     <None Remove="NAICS\2017_NAICS.csv" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Emails\Templates\AlertLender\AlertLender.cshtml" />
     <EmbeddedResource Include="NAICS\2017_NAICS.csv" />
   </ItemGroup>
 

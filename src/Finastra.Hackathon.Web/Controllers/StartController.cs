@@ -22,6 +22,8 @@ namespace Finastra.Hackathon.Web.Controllers
             SimulationConfiguration.EmailAddress = email;
             SimulationConfiguration.Lender = StaticData.Lenders.Single(x => x.Username == username);
             SimulationConfiguration.SimulationStarted = true;
+            SimulationConfiguration.CustomerAlteredRationAnalysis = false;
+            SimulationConfiguration.LenderProposedAction = false;
 
             return RedirectToAction("Login", "Authorization");
         }
