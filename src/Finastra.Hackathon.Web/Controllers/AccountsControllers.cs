@@ -5,7 +5,7 @@ namespace Finastra.Hackathon.Web.Controllers
     {
         public ActionResult Index()
         {
-            return View("~/Views/Accounts/Index.cshtml");
+            return View();
         }
     }
 }

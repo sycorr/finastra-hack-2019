@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Finastra.Hackathon.Web.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace Finastra.Hackathon.Web.Controllers
 {
@@ -28,17 +29,19 @@ namespace Finastra.Hackathon.Web.Controllers
             if (!HttpContext.Session.Keys.Any())
                 return RedirectToAction("Logout", "Authorization");
 
-            var predictor = new TimeSeriesPredictor();
-            var model = predictor.Predict(StaticData.AccountingPrinciples);
+            var isLender = HttpContext.Session.GetString("Role").Equals("Lender", StringComparison.OrdinalIgnoreCase);
 
-            return View(model);
+            if (isLender)
+                return RedirectToAction("Index", "Clients");
+
+            return RedirectToAction("Index", "Accounts");
         }
 
-		public async Task<IActionResult> Privacy2()
-        {
-            var bytes = new HtmlToPDFRenderer().ToPDF(null);
-            return File(bytes, "application/pdf", "test.pdf");
-        }
+		//public async Task<IActionResult> Privacy2()
+  //      {
+  //          var bytes = new HtmlToPDFRenderer().ToPDF(null);
+  //          return File(bytes, "application/pdf", "test.pdf");
+  //      }
 		
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
