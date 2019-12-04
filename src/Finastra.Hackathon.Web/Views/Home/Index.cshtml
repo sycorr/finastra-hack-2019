@@ -14,33 +14,82 @@
 <div class="container">
     <main role="main" class="pb-3">
         <div class="row">
-            <figure class="highcharts-figure">
-                <div id="container"></div>
-            </figure>
+            
+            
+            @{
+                var accounts = new[]
+                {
+                    new {
+                        Name = "Peter's Pumpkin Cannery",
+                        Balance = "38,800"
+                    },
+                    new {
+                        Name = "Bob's Banana Stand",
+                        Balance = "47,200"
+                    },
+                    new {
+                        Name = "Jeremy's Gnome Emporium",
+                        Balance = "12,400"
+                    },
+                    new {
+                        Name = "William's Worm Farm",
+                        Balance = "19,500"
+                    }
+                };
+            }
+            
+            
+            <div class="col-3">
+                <ul class="card-list">
+                @foreach (var acct in accounts)
+                {
+                    <li>
+                        <div class="card box-shadow p-2 w-100 mb-2">
+                            <div class="row">
+                                <div class="col-3"><i class="fal fa-credit-card"></i></div>
+                                <div class="col-9 d-flex flex-column">
+                                    <span>@acct.Name</span>
+                                    <span class="font-weight-bold">$@acct.Balance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                }
+                </ul>
+            </div>
+
+            <div class="col-9">
+                <figure class="highcharts-figure">
+                    <div id="container"></div>
+                </figure>
+            </div>
         </div>
+            
         <div class="row">
-            <table>
-                <thead>
+            <div class="col-12">
+                <table>
+                    <thead>
                     <tr>
                         <th>Date</th>
                         <th>Cost of Goods</th>
                         <th>Inventory</th>
                         <th>Turnover</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     @foreach (var ra in Model)
                     {
                         <tr>
                             <td>@ra.Date.ToShortDateString()</td>
                             <td>@ra.CostOfGoods.ToString("C0") @(ra.CostOfGoodsDelta > 0 ? "+-" + ra.CostOfGoodsDelta.ToString("N2") : "")</td>
-                            <td>@ra.Inventory.ToString("C0")  @(ra.InventoryDelta > 0 ? "+-" + ra.InventoryDelta.ToString("N2") : "")</td>
-                            <td>@ra.Turnover.ToString("N1")  @(ra.TurnoverDelta > 0 ? "+-" + ra.TurnoverDelta.ToString("N2") : "")</td>
+                            <td>@ra.Inventory.ToString("C0") @(ra.InventoryDelta > 0 ? "+-" + ra.InventoryDelta.ToString("N2") : "")</td>
+                            <td>@ra.Turnover.ToString("N1") @(ra.TurnoverDelta > 0 ? "+-" + ra.TurnoverDelta.ToString("N2") : "")</td>
                             <td></td>
                         </tr>
                     }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 </div>
