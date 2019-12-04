@@ -169,11 +169,11 @@ a#ffdc-current-locale-link::after {
     font-size: 13px;
 }
 
-#ffdc-logo {
+.ffdc-logo {
     width: 100%;
 }
 
-#ffdc-logo-img {
+.ffdc-logo-img {
     width: 100%;
     height: auto;
 }
