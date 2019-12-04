@@ -111,6 +111,7 @@ h4 {
   width: 100%;
 }
 .lender-btn {
+  text-decoration: none;
   color: #fff;
   background-color: #26a69a;
   text-align: center;
@@ -128,7 +129,11 @@ h4 {
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
+}
+.lender-btn:hover {
+  color: white;
   text-decoration: none;
+  background-color: #2bbbad;
 }
 .lender-btn.muted {
   background-color: rgba(38, 166, 154, 0.5);
