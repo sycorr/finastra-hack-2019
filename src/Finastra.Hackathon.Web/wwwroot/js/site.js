@@ -51,5 +51,15 @@ $(document).ready(function () {
     $('.s2').select2();
 
     $('.select2-container').addClass('form-control');
-    $('.select2-selection').css('border','none');
+    $('.select2-selection').css('border', 'none');
+
+    // toast closing stuff
+    $('.toast-close').on('click', function () {
+        $('.toast-panel').addClass('d-none');
+    })
+
+    // toast closing - temporary dummy button actions
+    $('.toast-panel button').on('click', function () {
+        $('.toast-panel').addClass('d-none');
+    })
 });
