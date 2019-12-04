@@ -75,9 +75,10 @@ namespace Finastra.Hackathon
                     {
                         d.Id = Guid.NewGuid();
 
+                        var now = new DateTime(2019, 12, 1);
                         var date = new DateTime(2017, 1, 1);
 
-                        while (date < DateTime.Now.AddMonths(3))
+                        while (date < now.AddMonths(3))
                         {
 
                             var inventoryTurnover = ((float)r.Next(3, 6)) + (float)r.NextDouble();
