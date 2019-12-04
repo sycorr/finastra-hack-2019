@@ -25,12 +25,21 @@
                                    type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.EmailAddress">
                         </div>
                     </div>
+                    @{
+                        var activeLender = SimulationConfiguration.Lender;
+                    }
+
+                    @(activeLender.Name)
 
                     <div class="form-group row">
                         <div class="col-12">
                             <div class="dropdown lender-menu">
-                                <button class="btn btn-default dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Lender
-                                    <span class="caret"></span>
+                                <button class="btn btn-default dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <li data-username="@(activeLender.Username)" data-id="@(activeLender.Id)" data-name="@(activeLender.Name)">
+                                        <a href="#" >
+                                            <img src="/img/portraits/@(activeLender.Id).jpg" max-width="32px"/>@(activeLender.Name)&nbsp;(@(activeLender.Username))
+                                        </a>
+                                    </li>
                                 </button>
                                 <ul class="dropdown-menu">
                                     @foreach (var lender in StaticData.Lenders)
@@ -63,8 +72,8 @@
 
                     <div class="row">
                         <div class="col d-flex justify-content-between">
-                            <button tabindex="4" class="lender-btn" type="submit">Let's Start!</button>
                             <a href="/start/reset" tabindex="4" class="lender-btn" type="">Reset Simulation</a>
+                            <button tabindex="4" class="lender-btn" type="submit">Let's Start!</button>
                         </div>
                     </div>
 
