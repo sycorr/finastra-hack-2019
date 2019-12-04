@@ -61,7 +61,7 @@
         var showToast = SimulationConfiguration.LenderProposedAction && !SimulationConfiguration.AlertDismissed && !role.Equals("Lender", StringComparison.OrdinalIgnoreCase);
     }
            
-    @if (true)
+    @if (showToast)
     {
     <div class="toast-panel p-3">
         <div class="d-inline-flex justify-content-end"><i class="fal fa-times toast-close"></i></div>
