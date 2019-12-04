@@ -1,11 +1,20 @@
 ﻿
-h3 {
+.main-header {
     border-bottom: 2px solid #694ed6;
     padding-bottom: 6px;
     margin-top: 24px;
+    a {
+        color: black;
+        &.collapsed {
+            transform: rotate(-180deg);
+        }
+    }
+
+
 }
 
 table {
+    margin-bottom: 24px;
 
     thead:first-of-type {
         th {
@@ -18,17 +27,26 @@ table {
 
     th {
         padding-top: 8px;
+        /*padding-bottom: 8px;*/
     }
 
     td {
         padding: 6px;
+
         a {
-            text-align:right;
+            text-align: right;
         }
     }
 
     td:first-of-type {
-        margin-left: 1rem;
+        padding-left: 1rem;
     }
 
+    tbody {
+        tr:first-of-type {
+            td {
+                padding-top: 1rem;
+            }
+        }
+    }
 }
