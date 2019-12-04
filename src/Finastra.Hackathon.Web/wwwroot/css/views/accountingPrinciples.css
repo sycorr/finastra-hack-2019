@@ -1,0 +1,23 @@
+﻿h3 {
+  border-bottom: 2px solid #694ed6;
+  padding-bottom: 6px;
+  margin-top: 24px;
+}
+table thead:first-of-type th {
+  border-bottom: 2px solid #694ed6;
+  margin-top: 12px;
+  padding: 12px 0px;
+  font-size: 18px;
+}
+table th {
+  padding-top: 8px;
+}
+table td {
+  padding: 6px;
+}
+table td a {
+  text-align: right;
+}
+table td:first-of-type {
+  margin-left: 1rem;
+}
