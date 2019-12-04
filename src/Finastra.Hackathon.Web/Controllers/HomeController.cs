@@ -26,6 +26,9 @@ namespace Finastra.Hackathon.Web.Controllers
 
         public IActionResult Index()
         {
+            if (!HttpContext.Session.Keys.Any())
+                return RedirectToAction("Logout", "Authorization");
+
             var predictor = new TimeSeriesPredictor();
             var model = predictor.GetValues();
 

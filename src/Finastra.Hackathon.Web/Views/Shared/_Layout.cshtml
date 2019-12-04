@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,12 +25,17 @@
                     <div class="navbar-home-logo ml-4"></div>
                 </a>
             </div>
+            @{
+                var id = Context.Session.GetString("Id");
+                var name = Context.Session.GetString("Name");
+            }
+           
             <div class="col-2 d-flex justify-content-end align-items-center">
-                <span class="mr-2">Bob Smith</span>
+                <span class="mr-3 font-weight-bold text-nowrap">@name</span>
                 <div class="avatar-wrap-lg">
                     <div class="avatar">
                         <!-- replace me -->
-                        <img src="/img/portraits/359cb3fb-be1a-4e06-ab05-68992df1917f.jpg">
+                        <img src="/img/portraits/@(id).jpg">
                     </div>
                 </div>
             </div>

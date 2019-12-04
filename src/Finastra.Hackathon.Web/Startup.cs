@@ -27,6 +27,10 @@ namespace Finastra.Hackathon.Web
         {
             services.AddControllersWithViews();
 
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(120);
+            });
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options => {
                     options.LoginPath = "/Authorization/Login/";
@@ -50,7 +54,7 @@ namespace Finastra.Hackathon.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 
