@@ -10,9 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Finastra.Hackathon.Web.Models;
 using Finastra.Hackathon.Web.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Finastra.Hackathon.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
