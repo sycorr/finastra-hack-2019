@@ -17,13 +17,14 @@ namespace Finastra.Hackathon.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Set(string username, string email)
+        public ActionResult Set(string username, string email, Guid naic)
         {
             SimulationConfiguration.EmailAddress = email;
             SimulationConfiguration.Lender = StaticData.Lenders.Single(x => x.Username == username);
             SimulationConfiguration.SimulationStarted = true;
             SimulationConfiguration.CustomerAlteredRationAnalysis = false;
             SimulationConfiguration.LenderProposedAction = false;
+            SimulationConfiguration.SelectedNAIC = naic;
 
             return RedirectToAction("Login", "Authorization");
         }

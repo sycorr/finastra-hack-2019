@@ -44,9 +44,12 @@ $(document).ready(function () {
                 <div><img src="/img/portraits/${id}.jpg" max-width="32px"/>${name} (${username})</div>
             `);
 
-            $('#username').val(username)
+            $('#username').val(username);
         });
 
     // start select 2 
     $('.s2').select2();
+
+    $('.select2-container').addClass('form-control');
+    $('.select2-selection').css('border','none');
 });

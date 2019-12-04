@@ -72,12 +72,22 @@
                     
                     <div class="row form-group">
                         <div class="col-12">
-                            <select class="form-control s2">
+                            <select name="naic" class="form-control s2">
                                 @foreach (var naic in StaticData.NAIC)
                                 {
-                                    <option value="@(naic.Id)">
-                                        @(naic.Code) - @(naic.Name)
-                                    </option>
+                                    if (naic.Id == SimulationConfiguration.SelectedNAIC)
+                                    {
+                                        <option value="@(naic.Id)" selected>
+                                            @(naic.Code) - @(naic.Name)
+                                        </option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@(naic.Id)">
+                                            @(naic.Code) - @(naic.Name)
+                                        </option>
+                                    }
+
                                 }
                             </select>
                         </div>
