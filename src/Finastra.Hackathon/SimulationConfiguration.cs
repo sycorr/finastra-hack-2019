@@ -19,6 +19,7 @@ namespace Finastra.Hackathon
         public static bool SimulationStarted { get; set; }
         public static bool CustomerAlteredRationAnalysis { get; set; }
         public static bool LenderProposedAction { get; set; }
+        public static bool AlertDismissed { get; set; }
 
         public static void Reset()
         {
@@ -30,6 +31,7 @@ namespace Finastra.Hackathon
             SimulationStarted = false;
             CustomerAlteredRationAnalysis = false;
             LenderProposedAction = false;
+            AlertDismissed = false;
         }
     }
 }

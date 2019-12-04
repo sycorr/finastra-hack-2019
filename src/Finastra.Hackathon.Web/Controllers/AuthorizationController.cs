@@ -32,6 +32,7 @@ namespace Finastra.Hackathon.Web.Controllers
                 identity = StaticData.BusinessOwner;
 
             {
+                SimulationConfiguration.LenderProposedAction = true;
                 HttpContext.Session.SetString("Id", identity.Id);
                 HttpContext.Session.SetString("Role", identity.IsLender ? "Lender" : "Customer");
                 HttpContext.Session.SetString("Name", identity.Name);

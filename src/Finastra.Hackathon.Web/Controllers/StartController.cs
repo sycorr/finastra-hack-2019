@@ -24,6 +24,7 @@ namespace Finastra.Hackathon.Web.Controllers
             SimulationConfiguration.SimulationStarted = true;
             SimulationConfiguration.CustomerAlteredRationAnalysis = false;
             SimulationConfiguration.LenderProposedAction = false;
+            SimulationConfiguration.AlertDismissed = false;
             SimulationConfiguration.SelectedNAIC = naic;
 
             return RedirectToAction("Login", "Authorization");

@@ -61,8 +61,7 @@
         var lenderId = SimulationConfiguration.Lender.Id;
     }
            
-    @*if (proposedAction)*@
-    @if (true)
+    @if (SimulationConfiguration.LenderProposedAction && !SimulationConfiguration.AlertDismissed)
     {
         <div class="toast-panel p-3">
             <div class="d-inline-flex justify-content-end"><i class="fal fa-times toast-close"></i></div>
