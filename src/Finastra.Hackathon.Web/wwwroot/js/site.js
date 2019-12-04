@@ -63,12 +63,21 @@ $(document).ready(function () {
     }
 
     // toast closing stuff
-    $('.toast-close').on('click', function () {
-        dismissToast();
-    })
+    $('.toast-close').on('click',
+        function() {
+            dismissToast();
+        });
 
     // toast closing - temporary dummy button actions
-    $('.toast-panel button').on('click', function () {
-        dismissToast();
-    })
+    $('.toast-panel button').on('click',
+        function() {
+            dismissToast();
+        });
+
+    // inventory turnover calculations (accounting principles page)
+    var cogs = +$('#costOfGoods').val();
+    var inventory = +$('#inventory').val();
+    var inventoryTurnover = cogs / inventory;
+    $('#inventory-turnover').text(inventoryTurnover.toFixed(2));
+    $('#inventory-turnover-days').text((+inventoryTurnover/360).toFixed(2));
 });

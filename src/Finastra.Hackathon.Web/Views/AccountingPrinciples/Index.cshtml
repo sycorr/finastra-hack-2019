@@ -39,7 +39,20 @@
 
         <form class="mb-3" id="acct-prin-form" action="/AccountingPrinciples/Set" method="post">
             <div class="row mb-2">
-                <div class="col-6">
+                <div class="col d-flex flex-column justify-content-between">
+                    <div class="row">
+                        <div class="col">
+                            <span>As of 12/5/2019</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <span>&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
                     <label for="username" class="control-label">Cost of Goods Sold</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -50,7 +63,7 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col">
                     <label for="username" class="control-label">Inventory</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -58,6 +71,26 @@
                         </div>
                         <input tabindex="2" id="inventory" class="form-control" name="inventory"
                                type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.RatioAnalysis.Inventory">
+                    </div>
+                </div>
+                <div class="col d-flex flex-column justify-content-between">
+                    <div class="row">
+                        <div class="col">
+                            <span>Turnover</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="inventory-turnover" class="col ml-2" style="padding: 6px;"></div>
+                    </div>
+                </div>
+                <div class="col d-flex flex-column justify-content-between">
+                    <div class="row">
+                        <div class="col">
+                            <span>Turnover Days</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="inventory-turnover-days" class="col ml-2" style="padding: 6px;"></div>
                     </div>
                 </div>
             </div>
