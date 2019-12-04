@@ -46,4 +46,7 @@ $(document).ready(function () {
 
             $('#username').val(username)
         });
+
+    // start select 2 
+    $('.s2').select2();
 });
