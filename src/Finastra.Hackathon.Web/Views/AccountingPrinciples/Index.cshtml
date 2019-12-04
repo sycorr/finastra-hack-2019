@@ -6,71 +6,68 @@
 
 <partial name="SideBar" view-data="ViewData"></partial>
 
+<link href="~/css/views/accountingPrinciples.css"/>
+
 <div class="jumbotron fin-blue rounded-0 navpad">
     <h4>Accounting Principles</h4>
 </div>
 
-
 <div class="container">
     <main role="main" class="pb-3">
-        <div class="row">
-            <div class="col">
-                Accounting Principles
-            </div>
-        </div>
-    </main>
-</div>
-<div class="container">
-    <main role="main" class="pb-3">
-
         <div class="row">
             <div class="col-12">
                 @if (SimulationConfiguration.CustomerAlteredRationAnalysis)
                 {
-                    <span>All of the covenants as dictated by your loans are up to date.</span>
+                    <div class="alert alert-success" role="alert">
+                        <i class="fal fa-thumbs-up"></i>
+                        <span>All of the covenants as dictated by your loans are up to date.</span>
+                    </div>
                 }
                 else
                 {
-                    <span>SOFT ALERT - Please enter the information required by your commercial lender for this time period.</span>
+                    <div class="alert alert-info" role="alert">
+                        <i class="far fa-inbox-in"></i>
+                        <span>Please enter the information required by your commercial lender for this time period.</span>
+                    </div>
                 }
             </div>
         </div>
         @if (!SimulationConfiguration.CustomerAlteredRationAnalysis)
         {
 
-            <div class="row">
+
+
+        <form class="mb-3" id="acct-prin-form" action="/AccountingPrinciples/Set" method="post">
+            <div class="row mb-2">
                 <div class="col-12">
-
-
-                    <form id="ffdc-form-login" class="form-horizontal" action="/AccountingPrinciples/Set" method="post">
-                        <div class="col s12 section">
-                            <div class="input-field">
-                                <input tabindex="1" id="costOfGoods" class="form-control" name="costOfGoods"
-                                       type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.RatioAnalysis.CostOfGoods">
-                                <label for="username" class="control-label">Cost of Goods Sold ($)</label>
-                            </div>
-                        </div>
-
-                        <div class="col s12 section">
-                            <div class="input-field">
-                                <input tabindex="1" id="inventory" class="form-control" name="inventory"
-                                       type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.RatioAnalysis.Inventory">
-                                <label for="username" class="control-label">Inventory ($)</label>
-                            </div>
-                        </div>
-
-                        <div class="col s12 section">
-                            <div class="valign-wrapper section">
-                                <div id="ffdc-form-buttons" class="col s6">
-                                    <div class="right">
-                                        <button tabindex="4" class="btn btn-primary btn-lg" type="submit">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    <label for="username" class="control-label">Cost of Goods Sold ($)</label>
+                    <div class="input-group">
+                        <input tabindex="1" id="costOfGoods" class="form-control" name="costOfGoods"
+                               type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.RatioAnalysis.CostOfGoods">
+                    </div>
                 </div>
             </div>
+
+            <div class="row mb-2">
+                <div class="col-12">
+                    <label for="username" class="control-label">Inventory ($)</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                        </div>
+                        <input tabindex="2" id="inventory" class="form-control" name="inventory"
+                               type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.RatioAnalysis.Inventory">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-12">
+                    <button tabindex="3" class="lender-btn" type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+
         }
 
         @{
@@ -85,10 +82,10 @@
 
             foreach (var year in years)
             {
-                <div>
+                <div class="w-100">
                     <h3>@year</h3>
-                    <div>
-                        <table>
+                    <div class="w-100">
+                        <table class="w-100">
                             <tbody>
                                 @if (year != 2019)
                                 {
@@ -119,8 +116,8 @@
                             </tbody>
                         </table>
                     </div>
-                    <div>
-                        <table>
+                    <div class="w-100">
+                        <table class="w-100">
                             <thead>
                                 <tr>
                                     <th>
