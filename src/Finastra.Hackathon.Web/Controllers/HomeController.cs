@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Finastra.Hackathon.Emails;
@@ -33,11 +34,16 @@ namespace Finastra.Hackathon.Web.Controllers
         {
             var email = "mpool@sycorr.com";
             await new EmailTasks().SendAlert(email);
-           // await new EmailTasks().SendMessage(email);
 
             return View();
         }
 
+		public async Task<IActionResult> Privacy2()
+        {
+            var bytes = new HtmlToPDFRenderer().ToPDF(null);
+            return File(bytes, "application/pdf", "test.pdf");
+        }
+		
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

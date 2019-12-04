@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="RazorEngine.NetCore" Version="2.2.4" />
+    <PackageReference Include="Aspose.PDF" Version="19.11.0" />
   </ItemGroup>
 
 </Project>

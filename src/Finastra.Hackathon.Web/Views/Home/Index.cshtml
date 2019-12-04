@@ -11,9 +11,13 @@
     <h4>Overview</h4>
 </div>
 
-
 <div class="container">
     <main role="main" class="pb-3">
+        <div class="row">
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+            </figure>
+        </div>
         <div class="row">
             <table>
                 <thead>
@@ -29,9 +33,9 @@
                     {
                         <tr>
                             <td>@ra.Date.ToShortDateString()</td>
-                            <td>@ra.CostOfGoods.ToString(format: "C0") @(ra.CostOfGoodsDelta > 0 ? "+-" + ra.CostOfGoodsDelta.ToString(format: "N2") : "")</td>
-                            <td>@ra.Inventory.ToString(format: "C0")  @(ra.InventoryDelta > 0 ? "+-" + ra.InventoryDelta.ToString(format: "N2") : "")</td>
-                            <td>@ra.Turnover.ToString(format: "N1")  @(ra.TurnoverDelta > 0 ? "+-" + ra.TurnoverDelta.ToString(format: "N2") : "")</td>
+                            <td>@ra.CostOfGoods.ToString("C0") @(ra.CostOfGoodsDelta > 0 ? "+-" + ra.CostOfGoodsDelta.ToString("N2") : "")</td>
+                            <td>@ra.Inventory.ToString("C0")  @(ra.InventoryDelta > 0 ? "+-" + ra.InventoryDelta.ToString("N2") : "")</td>
+                            <td>@ra.Turnover.ToString("N1")  @(ra.TurnoverDelta > 0 ? "+-" + ra.TurnoverDelta.ToString("N2") : "")</td>
                             <td></td>
                         </tr>
                     }
@@ -40,3 +44,162 @@
         </div>
     </main>
 </div>
+
+
+
+
+<script type="text/javascript">
+    var rmadata = [
+        @foreach (var ra in Model)
+        {
+            <text>[Date.parse('@ra.Date.ToShortDateString()'), 4.1],</text>
+        }
+    ];
+
+    var turnoverdata = [
+        @{
+            var renderLast = true;
+        }
+        @foreach (var ra in Model)
+        {
+            if (ra.TurnoverDelta > 0)
+            {
+                if (renderLast)
+                {
+                    <text>[Date.parse('@ra.Date.ToShortDateString()'), @ra.Turnover.ToString("N1")],</text>
+
+                    if (renderLast)
+                    {
+                        renderLast = false;
+                    }
+                }
+                else
+                {
+                    <text>[Date.parse('@ra.Date.ToShortDateString()'), null],</text>
+                }
+            }
+            else
+            {
+                <text>[Date.parse('@ra.Date.ToShortDateString()'), @ra.Turnover.ToString("N1")],</text>
+            }
+        }
+    ];
+
+    var predictiondata = [
+        @foreach (var ra in Model)
+        {
+           if (ra.TurnoverDelta <= 0)
+            {
+                <text>[Date.parse('@ra.Date.ToShortDateString()'), null],</text>
+            }
+            else
+            {
+                <text>[Date.parse('@ra.Date.ToShortDateString()'), @ra.Turnover.ToString("N1")],</text>
+            }
+        }
+    ];
+
+    Highcharts.chart({
+    chart: {
+    		plotBackgroundColor: null,
+				plotBorderWidth: 0,
+				plotShadow: false,
+        type: 'area',
+        renderTo: 'container'
+    },
+    credits: {
+			enabled: false
+		},
+		exporting: {
+			enabled: false
+		},
+		legend: {
+			enabled: false
+		},
+		title: {
+			text: 'Inventory Turnover'
+    },
+    subtitle: {
+        text: 'NAICS Code: 424490',
+        //align: 'right',
+        //verticalAlign: 'bottom'
+    },
+    legend: {
+        layout: 'vertical',
+        align: 'left',
+        verticalAlign: 'top',
+        x: 100,
+        y: 70,
+        floating: true,
+        borderWidth: 1,
+        backgroundColor:
+            Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF'
+    },
+    xAxis: {
+			type: 'datetime',
+			dateTimeLabelFormats: {
+				year: '%M %Y'
+			},
+			tickInterval: Date.UTC(2010, 1, 1) - Date.UTC(2010, 0, 1)
+		},
+    yAxis: {
+        title: {
+            text: 'Inventory Turnover'
+        }
+    },
+    plotOptions: {
+			series: {
+				dataLabels: {
+					enabled: false,
+					y: 0
+				}
+			},
+      area: {
+        marker: {
+          enabled: true,
+          symbol: 'circle',
+          radius: 3,
+          states: {
+            hover: {
+              enabled: true
+            }
+          }
+        }
+      }
+  	},
+    series: [
+    {
+    		type: 'area',
+        name: 'Historical',
+        data: turnoverdata
+    },
+    {
+        name: 'Prediction',
+        data: predictiondata,
+        color: '#449d44',
+
+    },
+    {
+        name: 'Industry Average',
+        data: rmadata,
+        type: 'line',
+        dashStyle: 'shortdot',
+        lineWidth: 4,
+        shadow: false,
+        color: '#888',
+        marker: {
+          enabled: false,
+          symbol: 'circle',
+          radius: 3,
+          states: {
+            hover: {
+             enabled: true
+            }
+          }
+        }
+    }
+    ]
+});
+
+</script>
+
