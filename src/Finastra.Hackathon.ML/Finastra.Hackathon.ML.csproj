@@ -10,4 +10,8 @@
     <PackageReference Include="Microsoft.ML.TimeSeries" Version="1.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Finastra.Hackathon\Finastra.Hackathon.csproj" />
+  </ItemGroup>
+
 </Project>

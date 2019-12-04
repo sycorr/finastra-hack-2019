@@ -30,7 +30,7 @@ namespace Finastra.Hackathon.Web.Controllers
                 return RedirectToAction("Logout", "Authorization");
 
             var predictor = new TimeSeriesPredictor();
-            var model = predictor.GetValues();
+            var model = predictor.Predict(StaticData.AccountingPrinciples);
 
             return View(model);
         }

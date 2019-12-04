@@ -28,17 +28,21 @@
             @{
                 var id = Context.Session.GetString("Id");
                 var name = Context.Session.GetString("Name");
+                var role = Context.Session.GetString("Role");
             }
            
-            <div class="col-2 d-flex justify-content-end align-items-center">
-                <span class="mr-3 font-weight-bold text-nowrap">@name</span>
-                <div class="avatar-wrap-lg">
-                    <div class="avatar">
-                        <!-- replace me -->
-                        <img src="/img/portraits/@(id).jpg">
+            @if (!String.IsNullOrEmpty(role))
+            {
+                <div class="col-2 d-flex justify-content-end align-items-center">
+                    <span class="mr-3 font-weight-bold text-nowrap">@name (@(role.Equals("Lender", StringComparison.OrdinalIgnoreCase) ? "Lender" : "Business Owner"))</span>
+                    <div class="avatar-wrap-lg">
+                        <div class="avatar">
+                            <!-- replace me -->
+                            <img src="/img/portraits/@(id).jpg">
+                        </div>
                     </div>
                 </div>
-            </div>
+            }
         </nav>
     </header>
 

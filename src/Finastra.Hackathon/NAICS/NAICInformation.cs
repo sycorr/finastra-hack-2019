@@ -12,9 +12,6 @@ namespace Finastra.Hackathon.NAICS
         public string Code { get; set; }
         [FieldQuoted(QuoteMode.OptionalForBoth)]
         public string Name { get; set; }
-        [FieldHidden]
-        public float? InventoryTurnover { get; set; }
-        [FieldHidden]
-        public float? InventoryTurnDays { get; set; }
+        
     }
 }
