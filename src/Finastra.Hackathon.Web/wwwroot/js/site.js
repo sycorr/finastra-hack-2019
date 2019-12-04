@@ -32,4 +32,18 @@ $(document).ready(function () {
         function () {
             $(this).popover('show');
         });
+
+    // lender menu on start page
+    $('.lender-menu li').on('click',
+        function (e) {
+            var name = $(this).attr('data-name');
+            var username = $(this).attr('data-username');
+            var id = $(this).attr('data-id');
+
+            $('#user-dropdown').empty().append(`
+                <div><img src="/img/portraits/${id}.jpg" max-width="32px"/>${name} (${username})</div>
+            `);
+
+            $('#username').val(username)
+        });
 });
