@@ -1,0 +1,354 @@
+﻿@using System
+@using System.Collections.Generic
+@using System.Linq
+@using Sycorr.PermissionAssist
+@using Sycorr.PermissionAssist.Extensions
+@model Sycorr.PermissionAssist.Reports.Templates.Reviews.Overview.OverviewModel
+@{
+    Layout = "ReportLayout";
+
+    double total = Model.Total.TotalItems;
+    double approved = Math.Round(Model.Total.ApprovedItems / total, 3);
+    double remediated = Math.Round(Model.Total.RemediatedItems / total, 3);
+    double flagged = Math.Round(Model.Total.FlaggedItems / total, 3);
+    double flaggedEnd = approved + flagged;
+    double remediatedEnd = flaggedEnd + remediated;
+    double pending = 1 - approved - remediated - flagged;
+    double r = 225f / 2f;
+    var completed = Math.Round((approved + flagged) * 100);
+
+    Func<double, double> getAngle = percent => percent * 360 - 90;
+    Func<double, double> getRadians = angle => angle * (Math.PI / 180);
+    Func<double, double> getXCoordFor = percent => Math.Round(Math.Cos(getRadians(getAngle(percent))), 6) * r + r;
+    Func<double, double> getYCoordFor = percent => Math.Round(Math.Sin(getRadians(getAngle(percent))), 6) * r + r;
+    Func<double, int> getArcFlag = percent => percent >= .5 ? 1 : 0;
+    Func<double, double, double, string, string> getPathString = (percent, percentStart, percentEnd, color) =>
+    {
+        if (Math.Abs(percent) > 0)
+            return string.Format("<path d='M {0} {1} A {2} {2} 0 {3} 1 {4} {5} L {2} {2} L {0} {1} Z' fill='{6}' stroke='#FFFFFF' stroke-width='1' stroke-linejoin='round'></path>",
+                getXCoordFor(percentStart),
+                getYCoordFor(percentStart),
+                r,
+                getArcFlag(percent),
+                getXCoordFor(Math.Abs(percent) >= 1 ? .999999 : percentEnd),
+                getYCoordFor(Math.Abs(percent) >= 1 ? .999999 : percentEnd),
+                color
+                );
+
+        return "";
+    };
+}
+<style type="text/css">
+    #segregations-datatable td,
+    #applications-datatable td {
+        font-size: 80%;
+    }
+
+    #segregations-datatable td h4,
+    #applications-datatable td h4 {
+        font-size: 16px !important;
+    }
+</style>
+
+<h2>Review Summary - @Model.Review.Name</h2>
+<table>
+    <tr>
+        <td width="55%">
+            <p>
+                A review named <strong>@Model.Review.Name</strong> was started on @Model.Review.OpenedDate.ToCompanyTime("MMM d, yyyy", "???")
+                @if (Model.Review.ClosedDate.HasValue)
+                {
+                    <span>, and marked as complete on @Model.Review.ClosedDate.ToCompanyTime("MMM d, yyyy", "???")<span>.</span></span>
+                }
+                else
+                {
+                    <span>.</span>
+                }
+            </p>
+            <p>
+                This was
+                @if (Model.Review.Type == ReviewType.Full)
+                {
+                    <span>a <strong>full review</strong> of all roles and privileges over</span>
+                }
+
+                @if (Model.Review.Type == ReviewType.Quick)
+                {
+                    <span>an <strong>elevated changes review</strong> over</span>
+                }
+
+                @{
+                    var appCount = Model.Applications.Count(x => x.ApplicationId != null);
+                    var appNoun = appCount > 0 ? " applications" : "";
+                    var appCountStr = appCount > 0 ? appCount.ToString() : "";
+                    var segCount = Model.Applications.Count(x => x.SegregationRuleId != null);
+                    var segCountStr = segCount > 0 ? segCount.ToString() : "";
+                    var segNoun = segCount > 0 ? " rule sets" : "";
+                    var conjoiner = appCount > 0 && segCount > 0 ? " and " : "";
+
+                    if (appCount == 1)
+                    {
+                        appNoun = " application";
+                    }
+
+                    if (segCount == 1)
+                    {
+                        segNoun = " rule set";
+                    }
+
+                    var covered1 = String.Format("{0}{1}", appCountStr, appNoun);
+                    var covered2 = String.Format("{0}{1}", segCountStr, segNoun);
+                }
+
+                <strong>@covered1</strong>@conjoiner<strong>@covered2</strong>. The data was matched against @Model.TotalIdentities.ToString("N0") unique identities found in @Model.CompanyName's identity directory
+                @if (Model.IdentitiesSince.HasValue)
+                {
+                    <span>since @Model.IdentitiesSince.ToCompanyTime("MMM yyyy", "???")</span><span>.</span>
+                }
+                else
+                {
+                    <span>.</span>
+                }
+
+                <span>
+                    As a result, a total of <strong>@Model.Total.TotalItems.ToString("N0") review items</strong> were created.
+                </span>
+
+                @if (Model.Review.Type == ReviewType.Quick)
+                {
+                    <span>
+                        @Model.TotalAutoApproved.ToString("N0") review items were automatically approved because they were approved in the last review and had no elevated changes since.
+                    </span>
+                }
+            </p>
+            <p>
+                <span>
+                    The review item approval depended on a <strong>@Model.HowManyPass approval workflow</strong> that required
+
+                    @if (Model.Review.AreApplicationOwnerReviewsRequired &&
+                         Model.Review.AreSecurityTeamReviewsRequired &&
+                         Model.Review.AreSupervisorReviewsRequired)
+                    {
+                        <span> security team, supervisor, and application manager approval.</span>
+                    }
+                    else
+                    {
+                        var required = new List<string>();
+                        var optional = new List<string>();
+
+                        if (Model.Review.AreSecurityTeamReviewsRequired)
+                        {
+                            required.Add("security team");
+                        }
+                        else
+                        {
+                            optional.Add("security team");
+                        }
+
+                        if (Model.Review.AreSupervisorReviewsRequired)
+                        {
+                            required.Add("supervisor");
+                        }
+                        else
+                        {
+                            optional.Add("supervisor");
+                        }
+
+                        if (Model.Review.AreApplicationOwnerReviewsRequired)
+                        {
+                            required.Add("application owner");
+                        }
+                        else
+                        {
+                            optional.Add("application owner");
+                        }
+
+                        <span> @String.Join(" and ", required) approval.</span>
+
+                        <span>Optional review input by the @String.Join(" and ", optional) was allowed.</span>
+                    }
+                </span>
+
+                @if (Model.TotalRoles > 0)
+                {
+                    <span>
+                        Additional checks occurred against <strong>@Model.TotalRoles.ToString("N0") entitlement role templates</strong> as defined by the security team.
+                    </span>
+                }
+            </p>
+            <p>
+                A total of <strong>@Model.Total.PercentCompleteFormatted</strong> of the review items were completed.
+            </p>
+
+        </td>
+        <td width="45%">
+            <div style="margin: 32px; width: 325px; height: 225px;position:relative">
+                <svg version="1.1" width="325" height="225" style="">
+                    @(getPathString(approved, 0, approved, "#449d44"))
+                    @(getPathString(flagged, approved, flaggedEnd, "#d43f3a"))
+                    @(getPathString(remediated, flaggedEnd, remediatedEnd, "#82e91b"))
+                    @(getPathString(pending, remediatedEnd, 0, "#d7eed7"))
+                    <circle cx="@r" cy="@r" fill="#ffffff" r="70"></circle>
+                    <g class="highcharts-legend" zIndex="7" transform="translate(230,70)">
+                        <g zIndex="1">
+                            <g>
+                                <g class="highcharts-legend-item" zIndex="1" transform="translate(8,3)"><text x="21" style="color: #333333; font-size: 12px; font-weight: normal; cursor: pointer; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; ; fill: #333333;" text-anchor="start" zIndex="2" y="15">Approved</text><rect x="0" y="4" width="16" height="12" zIndex="3" fill="#449d44"></rect></g>
+                                <g class="highcharts-legend-item" zIndex="1" transform="translate(8,24)"><text x="21" y="15" style="color: #333333; font-size: 12px; font-weight: normal; cursor: pointer; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; ; fill: #333333;" text-anchor="start" zIndex="2">Remediated</text><rect x="0" y="4" width="16" height="12" zIndex="3" fill="#82e91b"></rect></g>
+                                <g class="highcharts-legend-item" zIndex="1" transform="translate(8,45)"><text x="21" y="15" style="color: #333333; font-size: 12px; font-weight: normal; cursor: pointer; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; ; fill: #333333;" text-anchor="start" zIndex="2">Flagged</text><rect x="0" y="4" width="16" height="12" zIndex="3" fill="#d43f3a"></rect></g>
+                                <g class="highcharts-legend-item" zIndex="1" transform="translate(8,66)"><text x="21" y="15" style="color: #333333; font-size: 12px; font-weight: normal; cursor: pointer; font-family: &quot;Helvetica Neue&quot;, Helvetica, Arial, sans-serif; ; fill: #333333;" text-anchor="start" zIndex="2">Pending</text><rect x="0" y="4" width="16" height="12" zIndex="3" fill="#d7eed7"></rect></g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+
+                <div style="position: absolute; top: 84px; left: 60px;display: inline-block;color: #333333; font-size: 38px; font-weight: bold; fill: #333333; width: 112px;text-align:center">@Model.Total.PercentCompleteFormatted</div>
+                <div style="position: absolute; top: 128px; left: 60px;display: inline-block;color: #555555; font-size: 10px; font-weight: bold; fill: #555555; width: 112px;text-align:center">completed</div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+@if (Model.Applications.Any(x => x.ApplicationId != null))
+{
+    <div class="report-section">
+        <div class="panel panel-default">
+            <div class="panel-heading">Applications</div>
+            <div class="panel-body">
+
+                <table id="applications-datatable" class="table table-applications">
+                    <tbody>
+                        @foreach (var application in Model.Applications.Where(x => x.ApplicationId != null).OrderBy(x => x.Name))
+                        {
+                            <tr>
+                                <td width="30%">
+                                    <h4>@application.Name </h4>
+                                    <div class="as-of-date">as of @application.AsOfDate.ToCompanyTime("MMM d, yyyy", "???")</div>
+                                </td>
+                                <td width="10%" style="white-space: nowrap">
+                                    <div class="risk-rating" style="padding-top:9px">
+                                        @Include("Shared/ImportanceRating", application.ImportanceRating.GetValueOrDefault(ImportanceRating.None))
+                                    </div>
+                                </td>
+                                <td width="10%" style="white-space: nowrap">
+                                    <div class="items" style="padding-top:11px">@application.Total.TotalItems @(application.Total.TotalItems == 1 ? "User" : "Users")</div>
+                                </td>
+                                <td width="50%">
+                                    <div class="bar-label" style="font-size: 11px;">
+                                        @application.Total.PercentCompleteFormatted Reviewed
+                                        @if (application.Total.FlaggedItems > 0 || application.Total.RemediatedItems > 0)
+                                        {
+                                        <div class="pull-right" style="padding-right:1px">
+
+                                            @if (application.Total.RemediatedItems > 0)
+                                            {
+                                                <span style="display: inline-block;vertical-align:top">
+                                                    <svg version="1.1" height="12" width="12" aria-hidden="true" data-prefix="fas" data-icon="wrench" class="svg-inline--fa fa-wrench fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#3c763d" d="M507.7,109.1c-2.2-9-13.5-12.1-20.1-5.5l-74.4,74.4l-67.9-11.3l-11.3-67.9l74.4-74.4c6.6-6.6,3.4-17.9-5.7-20.2c-47.4-11.7-99.6,0.9-136.6,37.9c-39.6,39.6-50.6,97.1-34.1,147.2L18.7,402.8c-25,25-25,65.5,0,90.5s65.5,25,90.5,0L322.5,280c50.1,16.7,107.5,5.7,147.4-34.2C506.9,208.8,519.5,156.5,507.7,109.1z M64,472c-13.3,0-24-10.8-24-24c0-13.3,10.8-24,24-24s24,10.7,24,24C88,461.3,77.3,472,64,472z"></path></svg>
+                                                </span>
+                                                <span>
+                                                    @application.Total.RemediatedItems @(application.Total.RemediatedItems == 1 ? " item" : " items") remediated
+                                                </span>
+
+                                                if (application.Total.FlaggedItems > 0)
+                                                {
+                                                    <span>&nbsp;&nbsp;</span>
+                                                }
+                                            }
+
+                                            @if (application.Total.FlaggedItems > 0)
+                                            {
+                                                <span style="display: inline-block;vertical-align:top">
+                                                    <svg version="1.1" height="12" width="12" aria-hidden="true" data-prefix="fas" data-icon="flag" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#d9534f" d="M349.565 98.783C295.978 98.783 251.721 64 184.348 64c-24.955 0-47.309 4.384-68.045 12.013a55.947 55.947 0 0 0 3.586-23.562C118.117 24.015 94.806 1.206 66.338.048 34.345-1.254 8 24.296 8 56c0 19.026 9.497 35.825 24 45.945V488c0 13.255 10.745 24 24 24h16c13.255 0 24-10.745 24-24v-94.4c28.311-12.064 63.582-22.122 114.435-22.122 53.588 0 97.844 34.783 165.217 34.783 48.169 0 86.667-16.294 122.505-40.858C506.84 359.452 512 349.571 512 339.045v-243.1c0-23.393-24.269-38.87-45.485-29.016-34.338 15.948-76.454 31.854-116.95 31.854z"></path></svg>
+                                                </span>
+                                                <span style="padding-left: 1px">
+                                                    @application.Total.FlaggedItems @(application.Total.FlaggedItems == 1 ? " item" : " items") flagged
+                                                </span>
+                                            }
+
+                                        </div>
+                                        }
+                                    </div>
+                                    <div class="bullet-chart" title="@application.Total.CompletedItems of @application.Total.TotalItems items reviewed">
+                                        <div class="bar" style="width: @application.Total.PercentCompleteFormatted"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}
+
+@if (Model.Applications.Where(x => x.SegregationRuleId != null).Any())
+{
+    <div class="report-section">
+        <div class="panel panel-default">
+            <div class="panel-heading">Segregation Rules</div>
+            <div class="panel-body">
+                <table id="segregations-datatable" class="table table-applications">
+                    <tbody>
+                        @foreach (var rule in Model.Applications.Where(x => x.SegregationRuleId != null).OrderBy(x => x.Name))
+                        {
+                            <tr>
+                                <td width="30%">
+                                    <h4>@rule.Name </h4>
+                                    <div class="as-of-date">as of @rule.AsOfDate.ToCompanyTime("MMM d, yyyy", "???")</div>
+                                </td>
+                                <td width="10%" style="white-space: nowrap">
+                                    <div class="risk-rating">
+                                        &nbsp;
+                                    </div>
+                                </td>
+                                <td width="10%">
+                                    <div class="items" style="padding-top:11px">@rule.Total.TotalItems @(rule.Total.TotalItems == 1 ? "Violation" : "Violations")</div>
+                                </td>
+                                <td width="50%">
+                                    <div class="bar-label" style="font-size: 11px;">
+                                        @rule.Total.PercentCompleteFormatted Reviewed
+                                        @if (rule.Total.FlaggedItems > 0 || rule.Total.RemediatedItems > 0)
+                                        {
+                                            <div class="pull-right">
+
+                                                @if (rule.Total.RemediatedItems > 0)
+                                                {
+                                                    <span style="display: inline-block;vertical-align:top">
+                                                        <svg version="1.1" height="12" width="12" aria-hidden="true" data-prefix="fas" data-icon="wrench" class="svg-inline--fa fa-wrench fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#3c763d" d="M507.7,109.1c-2.2-9-13.5-12.1-20.1-5.5l-74.4,74.4l-67.9-11.3l-11.3-67.9l74.4-74.4c6.6-6.6,3.4-17.9-5.7-20.2c-47.4-11.7-99.6,0.9-136.6,37.9c-39.6,39.6-50.6,97.1-34.1,147.2L18.7,402.8c-25,25-25,65.5,0,90.5s65.5,25,90.5,0L322.5,280c50.1,16.7,107.5,5.7,147.4-34.2C506.9,208.8,519.5,156.5,507.7,109.1z M64,472c-13.3,0-24-10.8-24-24c0-13.3,10.8-24,24-24s24,10.7,24,24C88,461.3,77.3,472,64,472z"></path></svg>
+                                                    </span>
+                                                    @rule.Total.RemediatedItems
+                                                    @(rule.Total.RemediatedItems == 1 ? " item" : " items")
+                                                    <span>
+                                                        remediated
+                                                    </span>
+
+                                                    if (rule.Total.FlaggedItems > 0)
+                                                    {
+                                                        <span>&nbsp;&nbsp;</span>
+                                                    }
+                                                }
+
+                                                @if (rule.Total.FlaggedItems > 0)
+                                                {
+                                                    <span style="display: inline-block;vertical-align:top">
+                                                        <svg version="1.1" height="12" width="12" aria-hidden="true" data-prefix="fas" data-icon="flag" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="#d9534f" d="M349.565 98.783C295.978 98.783 251.721 64 184.348 64c-24.955 0-47.309 4.384-68.045 12.013a55.947 55.947 0 0 0 3.586-23.562C118.117 24.015 94.806 1.206 66.338.048 34.345-1.254 8 24.296 8 56c0 19.026 9.497 35.825 24 45.945V488c0 13.255 10.745 24 24 24h16c13.255 0 24-10.745 24-24v-94.4c28.311-12.064 63.582-22.122 114.435-22.122 53.588 0 97.844 34.783 165.217 34.783 48.169 0 86.667-16.294 122.505-40.858C506.84 359.452 512 349.571 512 339.045v-243.1c0-23.393-24.269-38.87-45.485-29.016-34.338 15.948-76.454 31.854-116.95 31.854z"></path></svg>
+                                                    </span>
+                                                    @rule.Total.FlaggedItems
+                                                    @(rule.Total.FlaggedItems == 1 ? " item" : " items")
+                                                    <span>flagged</span>
+                                                }
+
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="bullet-chart" title="@rule.Total.CompletedItems of @rule.Total.TotalItems items reviewed">
+                                        <div class="bar" style="width: @rule.Total.PercentCompleteFormatted"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+}

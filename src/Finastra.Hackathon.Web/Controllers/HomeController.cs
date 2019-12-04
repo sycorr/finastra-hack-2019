@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Finastra.Hackathon.Emails;
 using Finastra.Hackathon.ML;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Finastra.Hackathon.Web.Models;
+using Finastra.Hackathon.Web.Tasks;
 
 namespace Finastra.Hackathon.Web.Controllers
 {
@@ -27,8 +29,12 @@ namespace Finastra.Hackathon.Web.Controllers
             return View(model);
         }
 
-        public IActionResult Privacy()
+        public async Task<IActionResult> Privacy()
         {
+            var email = "mpool@sycorr.com";
+            await new EmailTasks().SendAlert(email);
+           // await new EmailTasks().SendMessage(email);
+
             return View();
         }
 

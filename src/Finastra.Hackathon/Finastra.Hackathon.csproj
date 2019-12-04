@@ -14,6 +14,25 @@
 
   <ItemGroup>
     <PackageReference Include="FileHelpers" Version="3.4.1" />
+    <Compile Remove="Reports\**" />
+    <EmbeddedResource Remove="Reports\**" />
+    <None Remove="Reports\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Emails\Attachments\logo-sm.png" />
+    <None Remove="Emails\Templates\EmailLayout.cshtml" />
+    <None Remove="Emails\Templates\HelloWorld\HelloWorld.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Emails\Attachments\logo-sm.png" />
+    <EmbeddedResource Include="Emails\Templates\EmailLayout.cshtml" />
+    <EmbeddedResource Include="Emails\Templates\HelloWorld\HelloWorld.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RazorEngine.NetCore" Version="2.2.4" />
   </ItemGroup>
 
 </Project>
