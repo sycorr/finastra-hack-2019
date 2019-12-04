@@ -9,7 +9,6 @@ using Finastra.Hackathon.ML;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Finastra.Hackathon.Web.Models;
-using Finastra.Hackathon.Web.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Finastra.Hackathon.Web.Controllers
@@ -33,14 +32,6 @@ namespace Finastra.Hackathon.Web.Controllers
             var model = predictor.Predict(StaticData.AccountingPrinciples);
 
             return View(model);
-        }
-
-        public async Task<IActionResult> Privacy()
-        {
-            var email = "mpool@sycorr.com";
-            await new EmailTasks().SendAlert(email);
-
-            return View();
         }
 
 		public async Task<IActionResult> Privacy2()
