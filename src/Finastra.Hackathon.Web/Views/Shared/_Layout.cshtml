@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="~/fonts/font-awesome/css/all.css" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="js/highcharts/highcharts.js"></script>
+    <script src="~/js/highcharts/highcharts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
 </head>
 <body>
@@ -58,25 +58,22 @@
     @{
         var lenderName = SimulationConfiguration.Lender.Name;
         var lenderId = SimulationConfiguration.Lender.Id;
+        var showToast = SimulationConfiguration.LenderProposedAction && !SimulationConfiguration.AlertDismissed && !role.Equals("Lender", StringComparison.OrdinalIgnoreCase);
     }
            
-    @if (SimulationConfiguration.LenderProposedAction && !SimulationConfiguration.AlertDismissed && !role.Equals("Lender", StringComparison.OrdinalIgnoreCase))
+    @if (showToast)
     {
-        <div class="toast-panel p-3">
-            <div class="d-inline-flex justify-content-end"><i class="fal fa-times toast-close"></i></div>
-            <div class="lender d-inline-flex justify-content-start">
-                <img src="/img/portraits/@(lenderId).jpg">
-                <div>
-                    <div class="blockquote-footer text-nowrap">Message from your banker</div>
-                    <div class="text-nowrap" style=" text-indent: 1rem; font-size: 19px; ">Nicky Sanders</div>
-                </div>
-            </div>
-            <div class="blockquote" style="font-size:0.85em">It looks like you might be looking at another great selling season, so I would like to chat about how we might help you take more inventory this quarter.  If we readjust the remaining <strong>9 payments</strong> on your annual operational loan to an new <strong>4.3% APR</strong> I think you might be able to improve your bottom line this year. You can view what the whole <a href="#">AM schedule</a> would like if you want.</div>
-            
-            <div class="row">
-                <div class="col"><button class="lender-btn">Take me to the insight</button></div>
-            </div>
-        </div>
+<div class="toast-panel p-3">
+    <div class="d-inline-flex justify-content-end"><i class="fal fa-times toast-close"></i></div>
+    <div class="lender">
+        <img src="/img/portraits/@(lenderId).jpg">
+    </div>
+    <div class="blockquote" style="font-size:0.85em">It looks like you might be looking at another great selling season, so I would like to chat about how we might help you take more inventory this quarter.  If we readjust the remaining <strong>9 payments</strong> on your annual operational loan to an new <strong>4.3% APR</strong> I think you might be able to improve your bottom line this year. You can view what the whole <a href="#" style="text-decoration: underline">AM schedule</a> would like if you want.</div>
+    <div class="blockquote-footer text-nowrap">@(lenderName)</div>
+    <div class="row">
+        <div class="col"><a class="lender-btn" href="/Insights/"><span class="w-100">Take me to this insight</span></a></div>
+    </div>
+</div>
     }
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
