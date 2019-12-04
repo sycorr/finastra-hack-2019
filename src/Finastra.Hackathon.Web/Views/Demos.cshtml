@@ -2,9 +2,10 @@
 @{
     ViewData["Title"] = "Demos";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Active"] = "Demos";
 }
 
-@*sidebar here*@
+<partial name="SideBar" view-data="ViewData"></partial>
 
 <div class="jumbotron fin-blue rounded-0">
     <h4>Component Demos</h4>
@@ -65,7 +66,7 @@
             <div class="card" style="background-color: gray; height: 400px;">
 
                 <!-- position as needed, this is hard-coded to be centered -->
-                <div class="stage" style="left: 50%; top: 50%;">
+                <div class="stage" style="left: 100%;">
                     <div class="info-icon pulsing noselect" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?" data-placement="bottom">&nbsp;<img src="~/img/4.jpg" id="throbber-icon" /></div>
                 </div>
 

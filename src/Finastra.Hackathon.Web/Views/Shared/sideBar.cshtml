@@ -3,12 +3,12 @@
 }
 <div id="sidebar" class="box-shadow">
     <div class="side-header p-2">
-        <div class="product-card mat-card box-shadow">
-            {{productLine}}
-        </div>
+
+        <img class="ffdc-logo-img" src="/img/fbv-logo.png" style="min-height: 50px;max-height: 50px; min-width: 183px;">
+
     </div>
     <ul>
-        <li data-route="accounts" class="@(key.Equals("Accounts") ? "active" : "")"><div class="side-spacer noselect"><i class="far fa-address-card"></i></div><a class="noselect" href="/Accounts">Accounts</a></li>
+        <li data-route="accounts" class="@(key.Equals("Accounts") ? "active" : "")"><div class="side-spacer noselect"><i class="far fa-list-alt"></i></div><a class="noselect" href="/Accounts">Accounts</a></li>
         <li data-route="accountingPrinciples" class="@(key.Equals("AccountingPrinciples") ? "active" : "")"><div class="side-spacer noselect"><i class="fal fa-calculator-alt"></i></div><a class="noselect" href="/AccountingPrinciples">Accounting Principles</a></li>
         <li data-route="insights" class="@(key.Equals("Insights") ? "active" : "")"><div class="side-spacer noselect"><i class="far fa-lightbulb-dollar"></i></div><a class="noselect" href="/Insights">Insights</a></li>
     </ul>
