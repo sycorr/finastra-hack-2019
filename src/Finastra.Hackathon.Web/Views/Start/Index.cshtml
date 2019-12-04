@@ -1,0 +1,71 @@
+﻿@using Finastra.Hackathon
+@{
+    ViewData[index: "Title"] = "Start Here";
+    ViewData[index: "Active"] = "Overview";
+}
+
+<div class="jumbotron fin-blue rounded-0">
+    <h4>Start</h4>
+</div>
+
+<div class="container">
+    <main role="main" class="pb-3">
+            
+        <div class="row">
+            <div class="col-12">
+                Information on how to reset here....
+
+                <form id="ffdc-form-login" class="form-horizontal" action="~/Start/Set" method="post">
+                    <div class="col s12 section">
+                        <div class="input-field">
+                            <input tabindex="1" id="email" class="form-control" name="email"
+                                   type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.EmailAddress">
+                            <label for="username" class="control-label">Username or email</label>
+                            <span class="helper-text" data-error="wrong" data-success="right">
+                                Your email
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col s12 section">
+                        <div class="input-field">
+                            <input tabindex="1" id="username" class="form-control" name="username"
+                                   type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.Lender.Username">
+                            <label for="username" class="control-label">Lender Username</label>
+                            <span class="helper-text" data-error="wrong" data-success="right">
+                                Choose lender, it currently is 
+                                @{
+                                    var id = SimulationConfiguration.Lender.Id;
+                                    var name = SimulationConfiguration.Lender.Name;
+                                    var username = SimulationConfiguration.Lender.Username;
+                                }
+           
+                                
+                                            <img src="/img/portraits/@(id).jpg">
+                                    <span class="mr-3 font-weight-bold text-nowrap">@name (@username)</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="col s12 section">
+                        <div class="valign-wrapper section">
+                            <div id="ffdc-form-buttons" class="col s6">
+                                <div class="right">
+                                    <button tabindex="4" class="btn btn-primary btn-lg" type="submit">Let's Start!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <a href="/start/reset" tabindex="4" class="btn btn-primary btn-lg" type="">Reset Simulation</a>
+            </div>
+        </div>
+    </main>
+</div>
+
+
+
+
+
+

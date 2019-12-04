@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Finastra.Hackathon.ML
 {
-    public class RationAnalysisPrediction
+    public class RatioAnalysisPrediction
     {
         public float[] Forecasted { get; set; }
 
