@@ -90,77 +90,83 @@
             foreach (var year in years)
             {
                 <div class="w-100">
-                    <h3>@year</h3>
-                    <div class="w-100">
-                        <table class="w-100 files">
-                            <thead>
-                            <tr>
-                                <th colspan="2">
-                                    Uploaded Files
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @if (year != 2019)
-                            {
-                                <tr>
-                                    <td>Tax Return</td>
-                                    <td class="text-right"><a href="#">Eide_Bailly-audited_1120C-@(year).pdf</a></td>
-                                </tr>
-                            }
-                            <tr>
-                                <td>Profit & Loss (Q1)</td>
-                                <td class="text-right"><a href="#">PL-Q1.pdf</a></td>
-                            </tr>
-                            <tr>
-                                <td>Profit & Loss (Q2)</td>
-                                <td class="text-right"><a href="#">ProfitLoss-cashbasis_Q2.pdf</a></td>
-                            </tr>
-                            <tr>
-                                <td>Profit & Loss (Q3)</td>
-                                <td class="text-right"><a href="#">Profit_Loss.pdf</a></td>
-                            </tr>
-                            @if (year != 2019)
-                            {
-                                <tr>
-                                    <td>Profit & Loss (Q4)</td>
-                                    <td class="text-right"><a href="#">Profit_Loss.pdf</a></td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
+                    <div class="main-header d-flex justify-content-between align-items-center"><h3>@year</h3>
+                        <a class="collapsed" data-toggle="collapse" href="#collapse-@(year)" role="button" aria-expanded="false" aria-controls="collapse-@(year)">
+                            <i class="fas fa-angle-up"></i>
+                        </a>
                     </div>
-                    <div class="w-100">
-                        <table class="w-100 ratios">
-                            <thead>
-                            <tr>
-                                <th colspan="3">Asset Management Ratios</th>
-                            </tr>
-                            </thead>
-                            <thead>
-                            <tr>
-                                <th>
-                                    As Of Date
-                                </th>
-                                <th>
-                                    Cost of Goods
-                                </th>
-                                <th>
-                                    Inventory
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach (var m in all.Where(x => x.Date.Year == year).OrderByDescending(x => x.Date.Month))
-                            {
-                                <tr>
-                                    <td>@m.Date.ToShortDateString()</td>
-                                    <td>@m.CostOfGoods.ToString("C0")</td>
-                                    <td>@m.Inventory.ToString("C0")</td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
+                    <div class="collapse" id="collapse-@(year)">
+                        <div class="w-100">
+                            <table class="w-100 files">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">
+                                            Uploaded Files
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (year != 2019)
+                                    {
+                                        <tr>
+                                            <td>Tax Return</td>
+                                            <td class="text-right"><a href="#">Eide_Bailly-audited_1120C-@(year).pdf</a></td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td>Profit & Loss (Q1)</td>
+                                        <td class="text-right"><a href="#">PL-Q1.pdf</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Profit & Loss (Q2)</td>
+                                        <td class="text-right"><a href="#">ProfitLoss-cashbasis_Q2.pdf</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Profit & Loss (Q3)</td>
+                                        <td class="text-right"><a href="#">Profit_Loss.pdf</a></td>
+                                    </tr>
+                                    @if (year != 2019)
+                                    {
+                                        <tr>
+                                            <td>Profit & Loss (Q4)</td>
+                                            <td class="text-right"><a href="#">Profit_Loss.pdf</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="w-100">
+                            <table class="w-100 ratios">
+                                <thead>
+                                    <tr>
+                                        <th colspan="3">Asset Management Ratios</th>
+                                    </tr>
+                                </thead>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            As Of Date
+                                        </th>
+                                        <th>
+                                            Cost of Goods
+                                        </th>
+                                        <th>
+                                            Inventory
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var m in all.Where(x => x.Date.Year == year).OrderByDescending(x => x.Date.Month))
+                                    {
+                                        <tr>
+                                            <td>@m.Date.ToShortDateString()</td>
+                                            <td>@m.CostOfGoods.ToString("C0")</td>
+                                            <td>@m.Inventory.ToString("C0")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             }
