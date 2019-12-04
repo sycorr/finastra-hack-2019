@@ -46,6 +46,9 @@ h4 {
   line-height: 66px;
   font-family: Roboto, roboto, "Helvetica Neue", sans-serif;
 }
+.jumbotron {
+  text-indent: 3rem;
+}
 .mat-ripple {
   overflow: hidden;
   position: relative;
