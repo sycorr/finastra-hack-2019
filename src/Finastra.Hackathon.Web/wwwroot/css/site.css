@@ -111,7 +111,6 @@ h4 {
   width: 100%;
 }
 .lender-btn {
-  text-decoration: none;
   color: #fff;
   background-color: #26a69a;
   text-align: center;
@@ -129,9 +128,73 @@ h4 {
   vertical-align: middle;
   -webkit-tap-highlight-color: transparent;
   white-space: nowrap;
+  text-decoration: none;
 }
 .lender-btn.muted {
   background-color: rgba(38, 166, 154, 0.5);
+}
+.finastra-btn {
+  align-items: flex-start;
+  background-color: #c137a2;
+  border-bottom-color: #ffffff;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  border-bottom-style: none;
+  border-bottom-width: 0px;
+  border-left-color: #ffffff;
+  border-left-style: none;
+  border-left-width: 0px;
+  border-right-color: #ffffff;
+  border-right-style: none;
+  border-right-width: 0px;
+  border-top-color: #ffffff;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+  border-top-style: none;
+  border-top-width: 0px;
+  box-shadow: rgba(33, 33, 33, 0.06) 0px 0px 0px 0px, rgba(33, 33, 33, 0.043) 0px 0px 0px 0px, rgba(33, 33, 33, 0.035) 0px 0px 0px 0px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: block;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-stretch: 100%;
+  font-style: normal;
+  font-weight: 500;
+  height: 35.5556px;
+  letter-spacing: normal;
+  line-height: 36px;
+  margin-bottom: 0px;
+  margin-left: 10px;
+  margin-right: 0px;
+  margin-top: 0px;
+  min-width: 64px;
+  outline-color: #ffffff;
+  outline-style: none;
+  outline-width: 0px;
+  overflow-x: visible;
+  overflow-y: visible;
+  padding-bottom: 0px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 0px;
+  pointer-events: auto;
+  position: relative;
+  text-align: center;
+  text-decoration-color: #ffffff;
+  text-decoration-line: none;
+  text-decoration-style: solid;
+  user-select: none;
+  vertical-align: baseline;
+  white-space: nowrap;
+  width: 114.389px;
+  word-spacing: 0px;
+  writing-mode: horizontal-tb;
+  -webkit-appearance: none;
+  -webkit-box-direction: normal;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-border-image: none;
 }
 .product-card {
   background: white bottom left / 100% 30% no-repeat url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="320" height="72"><defs><style>.a{fill:url(%23a);}</style><linearGradient id="a" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox"><stop offset="0" stop-color="%23694ed6"/><stop offset="0.698" stop-color="%23c137a2"/><stop offset="0.895" stop-color="%23e95247"/><stop offset="1" stop-color="%23e42d1a"/></linearGradient></defs><path class="a" d="M320,161.6V113.9c-2.8,2.1-5.665,4.178-8.645,6.217-57.06,39.116-131.993,15.1-180.525,3.3C114.2,119.358,65.28,101.675,0,89.6v72Z" transform="translate(0 -89.6)"/></svg>');
@@ -178,7 +241,7 @@ h4 {
   border-radius: 50%;
 }
 .toast-panel {
-  position: absolute;
+  position: fixed;
   background-color: #fff;
   bottom: 24px;
   right: 24px;
@@ -207,7 +270,29 @@ h4 {
   list-style: none;
   padding-left: 0px;
 }
-a .stage {
+.card-list .account-card {
+  width: 100%;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 4px 5px 0px rgba(0, 0, 0, 0.042), 0px 1px 10px 0px rgba(0, 0, 0, 0.036);
+  margin: 0.5rem;
+  padding: 0.5rem;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  color: #414141;
+}
+.card-list .account-card .balance {
+  font: 700 18px/21px "Futura EF", "futura-pt", "Futura", "Hind", "Verdana", "Arial Black", sans-serif;
+  margin: 0 0 16px;
+}
+.stage {
   position: absolute;
   transform: translate(-50%, -50%);
 }

@@ -53,13 +53,22 @@ $(document).ready(function () {
     $('.select2-container').addClass('form-control');
     $('.select2-selection').css('border', 'none');
 
+    function dismissToast() {
+        $('.toast-panel').addClass('d-none');
+        // ajax to save dismissed stuff
+        $.post('/toastDismissed',
+            function() {
+
+            });
+    }
+
     // toast closing stuff
     $('.toast-close').on('click', function () {
-        $('.toast-panel').addClass('d-none');
+        dismissToast();
     })
 
     // toast closing - temporary dummy button actions
     $('.toast-panel button').on('click', function () {
-        $('.toast-panel').addClass('d-none');
+        dismissToast();
     })
 });

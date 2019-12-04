@@ -88,7 +88,6 @@ h4 {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
-
     transition: opacity, transform 0ms cubic-bezier(0, 0, 0.2, 1);
     transform: scale(0);
 
@@ -167,6 +166,8 @@ h4 {
     }
 }
 
+
+
 .lender-btn {
     text-decoration: none;
     color: #fff;
@@ -186,9 +187,74 @@ h4 {
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
     white-space: nowrap;
+    text-decoration: none;
     &.muted {
         background-color:rgba(38, 166, 154, 0.5);
     }
+}
+
+.finastra-btn {
+    align-items: flex-start;
+    background-color: rgb(193, 55, 162);
+    border-bottom-color: rgb(255, 255, 255);
+    border-bottom-left-radius: 18px;
+    border-bottom-right-radius: 18px;
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+    border-left-color: rgb(255, 255, 255);
+    border-left-style: none;
+    border-left-width: 0px;
+    border-right-color: rgb(255, 255, 255);
+    border-right-style: none;
+    border-right-width: 0px;
+    border-top-color: rgb(255, 255, 255);
+    border-top-left-radius: 18px;
+    border-top-right-radius: 18px;
+    border-top-style: none;
+    border-top-width: 0px;
+    box-shadow: rgba(33, 33, 33, 0.06) 0px 0px 0px 0px, rgba(33, 33, 33, 0.043) 0px 0px 0px 0px, rgba(33, 33, 33, 0.035) 0px 0px 0px 0px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    display: block;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-stretch: 100%;
+    font-style: normal;
+    font-weight: 500;
+    height: 35.5556px;
+    letter-spacing: normal;
+    line-height: 36px;
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 0px;
+    margin-top: 0px;
+    min-width: 64px;
+    outline-color: rgb(255, 255, 255);
+    outline-style: none;
+    outline-width: 0px;
+    overflow-x: visible;
+    overflow-y: visible;
+    padding-bottom: 0px;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 0px;
+    pointer-events: auto;
+    position: relative;
+    text-align: center;
+    text-decoration-color: rgb(255, 255, 255);
+    text-decoration-line: none;
+    text-decoration-style: solid;
+    user-select: none;
+    vertical-align: baseline;
+    white-space: nowrap;
+    width: 114.389px;
+    word-spacing: 0px;
+    writing-mode: horizontal-tb;
+    -webkit-appearance: none;
+    -webkit-box-direction: normal;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-border-image: none;
 }
 
 .product-card {
@@ -243,7 +309,7 @@ h4 {
 }
 
 .toast-panel {
-    position: absolute;
+    position: fixed;
     background-color: #fff;
     bottom: 24px;
     right: 24px;
@@ -278,7 +344,31 @@ h4 {
 .card-list {
     list-style: none;
     padding-left: 0px;
-}a
+
+    .account-card {
+        width: 100%;
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 4px 5px 0px rgba(0, 0, 0, 0.042), 0px 1px 10px 0px rgba(0, 0, 0, 0.036);
+        margin: 0.5rem;
+        padding: 0.5rem;
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 1px solid rgba(0,0,0,.125);
+        border-radius: .25rem;
+        color: #414141;
+
+        .balance {
+            font: 700 18px/21px "Futura EF", "futura-pt", "Futura", "Hind", "Verdana", "Arial Black", sans-serif;
+            margin: 0 0 16px;
+        }
+    }
+}
 
 
 //////////////////////
