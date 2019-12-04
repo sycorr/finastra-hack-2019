@@ -1,6 +1,14 @@
-﻿@{
+﻿@using Finastra.Hackathon.NAICS
+@{
     ViewData["Title"] = "Privacy Policy";
 }
 <h1>@ViewData["Title"]</h1>
 
 <p>Use this page to detail your site's privacy policy.</p>
+
+<ol>
+@foreach (var p in NAICSRepository.All())
+{
+    <li>@String.Format("{0} - {1}", p.Code, p.Name)</li>
+}
+</ol>

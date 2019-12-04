@@ -4,4 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="NAICS\2017_NAICS.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="NAICS\2017_NAICS.csv" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FileHelpers" Version="3.4.1" />
+  </ItemGroup>
+
 </Project>
