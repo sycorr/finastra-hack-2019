@@ -8,10 +8,93 @@
 
 <partial name="SideBar" view-data="ViewData"></partial>
 
+<link rel="stylesheet" href="~/css/views/accountingPrinciples.css" />
+
 <div class="jumbotron fin-blue rounded-0 navpad">
     <h4>Insights</h4>
 </div>
 
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="row">
+            <div class="col-12">
+                <figure class="highcharts-figure">
+                    <div id="container" class="w-100"></div>
+                </figure>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+                @{
+                    var all = StaticData.AccountingPrinciples.ToList();
+
+                    if (SimulationConfiguration.CustomerAlteredRationAnalysis)
+                    {
+                        all.Add(SimulationConfiguration.RatioAnalysis);
+                    }
+
+                    var years = all.Select(x => x.Date.Year).Distinct().OrderByDescending(x => x).ToList();
+
+                    foreach (var year in years)
+                    {
+                        <div class="w-100">
+                            <div class="main-header d-flex justify-content-between align-items-center">
+                                <h3>@year</h3>
+                                <a class="collapsed" data-toggle="collapse" href="#collapse-@(year)" role="button" aria-expanded="false" aria-controls="collapse-@(year)">
+                                    <i class="fas fa-angle-up"></i>
+                                </a>
+                            </div>
+                            <div class="collapse" id="collapse-@(year)">
+                                <div class="w-100" style="padding: 25px 15px">
+                                    <table class="w-100 ratios">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="5">Asset Management Ratios</th>
+                                            </tr>
+                                        </thead>
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    As Of Date
+                                                </th>
+                                                <th>
+                                                    Cost of Goods
+                                                </th>
+                                                <th>
+                                                    Inventory
+                                                </th>
+                                                <th>
+                                                    Turnover
+                                                </th>
+                                                <th>
+                                                    Turn-Days
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var m in all.Where(x => x.Date.Year == year).OrderByDescending(x => x.Date.Month))
+                                            {
+                                                <tr>
+                                                    <td>@m.Date.ToShortDateString()</td>
+                                                    <td>@m.CostOfGoods.ToString("C0")</td>
+                                                    <td>@m.Inventory.ToString("C0")</td>
+                                                    <td>@m.Turnover.ToString("N2")</td>
+                                                    <td>@m.TurnDays.ToString("N2")</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </main>
+</div>
 
 <div class="container">
     <main role="main" class="pb-3">
@@ -25,28 +108,7 @@
 
         <div class="row">
             <div class="col-12">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Cost of Goods</th>
-                            <th>Inventory</th>
-                            <th>Turnover</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var ra in Model.RatioAnalyses)
-                        {
-                            <tr>
-                                <td>@ra.Date.ToShortDateString()</td>
-                                <td>@ra.CostOfGoods.ToString("C0") @(ra.CostOfGoodsDelta > 0 ? "+-" + ra.CostOfGoodsDelta.ToString("N2") : "")</td>
-                                <td>@ra.Inventory.ToString("C0") @(ra.InventoryDelta > 0 ? "+-" + ra.InventoryDelta.ToString("N2") : "")</td>
-                                <td>@ra.Turnover.ToString("N1") @(ra.TurnoverDelta > 0 ? "+-" + ra.TurnoverDelta.ToString("N2") : "")</td>
-                                <td></td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                
             </div>
         </div>
     </main>

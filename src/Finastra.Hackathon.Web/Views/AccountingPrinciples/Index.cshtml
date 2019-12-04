@@ -96,7 +96,7 @@
                         </a>
                     </div>
                     <div class="collapse" id="collapse-@(year)">
-                        <div class="w-100">
+                        <div class="w-100" style="padding: 25px 15px">
                             <table class="w-100 files">
                                 <thead>
                                     <tr>
@@ -135,11 +135,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="w-100">
+                        <div class="w-100" style="padding: 0 15px 25px">
                             <table class="w-100 ratios">
                                 <thead>
                                     <tr>
-                                        <th colspan="3">Asset Management Ratios</th>
+                                        <th colspan="5">Asset Management Ratios</th>
                                     </tr>
                                 </thead>
                                 <thead>
@@ -153,16 +153,24 @@
                                         <th>
                                             Inventory
                                         </th>
+                                        <th>
+                                            Turnover
+                                        </th>
+                                        <th>
+                                            Turn-Days
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var m in all.Where(x => x.Date.Year == year).OrderByDescending(x => x.Date.Month))
                                     {
-                                        <tr>
-                                            <td>@m.Date.ToShortDateString()</td>
-                                            <td>@m.CostOfGoods.ToString("C0")</td>
-                                            <td>@m.Inventory.ToString("C0")</td>
-                                        </tr>
+                                    <tr>
+                                        <td>@m.Date.ToShortDateString()</td>
+                                        <td>@m.CostOfGoods.ToString("C0")</td>
+                                        <td>@m.Inventory.ToString("C0")</td>
+                                        <td>@m.Turnover.ToString("N2")</td>
+                                        <td>@m.TurnDays.ToString("N2")</td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
