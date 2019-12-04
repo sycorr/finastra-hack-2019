@@ -38,14 +38,14 @@
 
                     foreach (var year in years)
                     {
+                        var collapsed = year == 2019;
                         <div class="w-100">
-                            <div class="main-header d-flex justify-content-between align-items-center">
-                                <h3>@year</h3>
-                                <a class="collapsed" data-toggle="collapse" href="#collapse-@(year)" role="button" aria-expanded="false" aria-controls="collapse-@(year)">
+                            <div class="main-header d-flex justify-content-between align-items-center"><h3>@year</h3>
+                                <a class="@(collapsed ? "" : "collapsed")" data-toggle="collapse" href="#collapse-@(year)" role="button" aria-expanded="@(!collapsed)" aria-controls="collapse-@(year)">
                                     <i class="fas fa-angle-up"></i>
                                 </a>
                             </div>
-                            <div class="collapse" id="collapse-@(year)">
+                            <div class="@(collapsed ? "" : "collapse")" id="collapse-@(year)">
                                 <div class="w-100" style="padding: 25px 15px">
                                     <table class="w-100 ratios">
                                         <thead>
