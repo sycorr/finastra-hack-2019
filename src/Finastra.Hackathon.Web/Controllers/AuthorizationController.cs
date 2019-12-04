@@ -22,6 +22,9 @@ namespace Finastra.Hackathon.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
+            if (String.IsNullOrWhiteSpace(username))
+                return RedirectToAction("Login", "Authorization");
+
             var identity =
                 StaticData.Lenders.FirstOrDefault(x => x.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
 

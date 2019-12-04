@@ -76,18 +76,25 @@ namespace Finastra.Hackathon
                         d.Id = Guid.NewGuid();
 
                         var now = new DateTime(2019, 12, 1);
-                        var date = new DateTime(2017, 1, 1);
+                        var date = new DateTime(2016, 7, 1);
 
-                        while (date < now.AddMonths(3))
+                        while (date <= now)
                         {
-
                             var inventoryTurnover = ((float)r.Next(3, 6)) + (float)r.NextDouble();
                             var inventoryTurnDays = ((float)r.Next(50, 90)) + (float)r.NextDouble();
 
-                            if (d.Code == "424490" && date.Year == 2019)
+                            if (d.Code == "424490")
                             {
-                                inventoryTurnover = 4.2f;
-                                inventoryTurnDays = 74f;
+                                if (date.Year == 2019)
+                                {
+                                    inventoryTurnover = 4.2f;
+                                    inventoryTurnDays = 74f;
+                                }
+                                else
+                                {
+                                    inventoryTurnover = 5.4f;
+                                    inventoryTurnDays = 82f;
+                                }
                             }
 
                             rma.Add(new RMAInformation()
