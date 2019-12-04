@@ -29,7 +29,11 @@ body {
 }
 
 .navbar {
-    flex-wrap: nowrap!important;
+    flex-wrap: nowrap !important;
+    background-color: white;
+    z-index: 105;
+    position: fixed;
+    width: 100%;
 }
 
 .navbar-home-logo {
@@ -120,6 +124,10 @@ h4 {
     -ms-user-select: none; /* Internet Explorer/Edge */
     user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
+}
+
+.navpad {
+    margin-top: @navHeight;
 }
 
 
@@ -281,7 +289,7 @@ h4 {
 #sidebar {
     width: @sidebarWidth;
     max-width: @sidebarWidth;
-    z-index: 100;
+    z-index: 110;
     height: 100% !important;
     background-color: #fff;
     flex-direction: column;
@@ -292,6 +300,13 @@ h4 {
 
     &.sidebar-display {
         display: flex;
+    }
+
+    .close-sidebar {
+        position: absolute;
+        left: calc(100% - 24px);
+        top: 12px;
+        cursor: pointer;
     }
 
     .side-header {
