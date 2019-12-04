@@ -42,6 +42,8 @@ namespace Finastra.Hackathon.NAICS
                             d.InventoryTurnDays = 74f;
                         }
                     }
+
+                    Data = data;
                 }
             };
         }

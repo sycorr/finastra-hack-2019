@@ -9,10 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Finastra.Hackathon.ML\Finastra.Hackathon.ML.csproj" />
     <ProjectReference Include="..\Finastra.Hackathon\Finastra.Hackathon.csproj" />
   </ItemGroup>
