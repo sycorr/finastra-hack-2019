@@ -1,0 +1,263 @@
+
+html {
+    font-family: "Roboto", sans-serif;
+    font-weight: normal;
+}
+
+#ffdc-form-remember-me {
+    padding: 0;
+}
+
+#ffdc-form-buttons {
+    padding: 0;
+}
+
+/* Code */
+#ffdc-code textarea {
+    width: 100%;
+    height: 8em;
+}
+
+#ffdc-form-buttons {
+  margin-top: 40px;
+}
+
+
+#ffdc-form-options span {
+    display: block;
+}
+
+#ffdc-form-options .checkbox {
+    margin-top: 0;
+    color: #72767b;
+}
+
+#ffdc-registration {
+    margin-bottom: 15px;
+}
+
+/* Social */
+#ffdc-social-providers ul {
+    padding: 0;
+}
+
+#ffdc-social-providers li {
+    display: block;
+}
+
+#ffdc-social-providers li:first-of-type {
+    margin-top: 0;
+}
+
+
+/* TOTP */
+
+ol#ffdc-totp-settings {
+    margin: 0;
+    padding-left: 20px;
+}
+
+ul#ffdc-totp-supported-apps {
+  margin-bottom: 10px;
+}
+
+#ffdc-totp-secret-qr-code {
+    max-width:150px;
+    max-height:150px;
+}
+
+#ffdc-totp-secret-key {
+    background-color: #fff;
+    color: #333333;
+    font-size: 16px;
+    padding: 10px 0;
+}
+
+/* OAuth */
+
+#ffdc-oauth h3 {
+    margin-top: 0;
+}
+
+#ffdc-oauth ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#ffdc-oauth ul li {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    padding: 10px 0;
+}
+
+#ffdc-oauth ul li:first-of-type {
+    border-top: 0;
+}
+
+#ffdc-oauth .ffdc-role {
+    display: inline-block;
+    width: 50%;
+}
+
+#ffdc-locale ul {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    list-style: none;
+    right: 0;
+    top: 20px;
+    min-width: 100px;
+    padding: 2px 0;
+    border: solid 1px #bbb;
+}
+
+#ffdc-locale:hover ul {
+    display: block;
+    margin: 0;
+}
+
+#ffdc-locale ul li a {
+    display: block;
+    padding: 5px 14px;
+    color: #000 !important;
+    text-decoration: none;
+    line-height: 20px;
+}
+
+#ffdc-locale ul li a:hover {
+    color: #4d5258;
+    background-color: #d4edfa;
+}
+
+#ffdc-locale-dropdown a {
+    color: #4d5258;
+    background: 0 0;
+    padding: 0 15px 0 0;
+    font-weight: 300;
+}
+
+#ffdc-locale-dropdown a:hover {
+    text-decoration: none;
+}
+
+a#ffdc-current-locale-link {
+    display: block;
+    padding: 0 5px;
+}
+
+a#ffdc-current-locale-link::after {
+    content: "\2c5";
+    margin-left: 4px;
+}
+
+#ffdc-content {
+    width: 100%;
+}
+
+#ffdc-content-wrapper .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#ffdc-info {
+    padding-bottom: 200px;
+    margin-bottom: -200px;
+}
+
+#ffdc-info-wrapper {
+    font-size: 13px;
+}
+
+#ffdc-logo {
+    width: 100%;
+}
+
+#ffdc-logo-img {
+    width: 100%;
+    height: auto;
+}
+
+@media (min-height: 646px) {
+    #ffdc-container-wrapper {
+        bottom: 12%;
+    }
+}
+
+@media (max-height: 645px) {
+    #ffdc-container-wrapper {
+        padding-top: 50px;
+        top: 20%;
+    }
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+}
+
+#ffdc-body-wrapper {
+    height: 100%;
+    margin: 0;
+}
+
+#ffdc-background-img-wrapper {
+    height: 100%;
+    padding: 0;
+}
+
+#ffdc-background-img {
+    padding: 0;
+    background: url("../img/background.jpg") no-repeat center center fixed;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.btn-provider {
+    width: 95px;
+    height: 30px;
+    border-radius: 2px;
+    background-color: #ffffff;
+    border: solid 1px #694ed6;
+    color: #694ed6;
+    padding: 5px 10px;
+}
+
+@font-face {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    src: local("Material Icons"), local("MaterialIcons-Regular"),
+         url(../lib/materialicons/MaterialIcons-Regular.woff2) format("woff2"),
+         url(../lib/materialicons/MaterialIcons-Regular.woff) format("woff"),
+         url(../lib/materialicons/MaterialIcons-Regular.ttf) format("truetype");
+}
+
+.material-icons {
+    font-family: "Material Icons";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 15px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: "liga";
+}

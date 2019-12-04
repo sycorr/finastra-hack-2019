@@ -1,36 +1,42 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData[index: "Title"] = "Home Page";
+    ViewData[index: "Active"] = "Overview";
 }
 
 @model IEnumerable<Finastra.Hackathon.ML.RatioAnalysis>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<partial name="SideBar" view-data="ViewData"></partial>
+
+<div class="jumbotron fin-blue rounded-0">
+    <h4>Overview</h4>
 </div>
 
 
-<div class="row">
-    <table>
-        <thead>
-        <tr>
-            <th>Date</th>
-            <th>Cost of Goods</th>
-            <th>Inventory</th>
-            <th>Turnover</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var ra in Model)
-        {
-            <tr>
-                <td>@ra.Date.ToShortDateString()</td>
-                <td>@ra.CostOfGoods.ToString("C0") @(ra.CostOfGoodsDelta > 0 ? "+-" + ra.CostOfGoodsDelta.ToString("N2") : "")</td>
-                <td>@ra.Inventory.ToString("C0")  @(ra.InventoryDelta > 0 ? "+-" + ra.InventoryDelta.ToString("N2") : "")</td>
-                <td>@ra.Turnover.ToString("N1")  @(ra.TurnoverDelta > 0 ? "+-" + ra.TurnoverDelta.ToString("N2") : "")</td>
-                <td></td>
-            </tr>
-        }
-        </tbody>
-    </table>
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="row">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Cost of Goods</th>
+                        <th>Inventory</th>
+                        <th>Turnover</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ra in Model)
+                    {
+                        <tr>
+                            <td>@ra.Date.ToShortDateString()</td>
+                            <td>@ra.CostOfGoods.ToString(format: "C0") @(ra.CostOfGoodsDelta > 0 ? "+-" + ra.CostOfGoodsDelta.ToString(format: "N2") : "")</td>
+                            <td>@ra.Inventory.ToString(format: "C0")  @(ra.InventoryDelta > 0 ? "+-" + ra.InventoryDelta.ToString(format: "N2") : "")</td>
+                            <td>@ra.Turnover.ToString(format: "N1")  @(ra.TurnoverDelta > 0 ? "+-" + ra.TurnoverDelta.ToString(format: "N2") : "")</td>
+                            <td></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </main>
 </div>

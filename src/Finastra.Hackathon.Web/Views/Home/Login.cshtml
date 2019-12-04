@@ -1,0 +1,112 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sycorr Finastra Login</title>
+
+    <link rel="stylesheet" href="~/css/login.css">
+    <link rel="stylesheet" href="~/css/materialize.css">
+    <link rel="stylesheet" href="~/css/materialize.min.css">
+
+    <style>
+        html, body {
+            width: 100% !important;
+            min-width: 100% !important;
+            height: 100% !important;
+            min-height: 100% !important;
+            padding: 0px !important;
+            margin: 0px !important;
+            overflow: hidden !important;
+        }
+    </style>
+</head>
+
+<body class="container" style="min-width: 100%;">
+    <div id="ffdc-body-wrapper" class="row valign-wrapper">
+        <div id="ffdc-body-content-wrapper" class="col s12 m6 l4">
+            <div id="ffdc-container" class="row">
+                <div id="ffdc-container-wrapper" class="col s10 offset-s1 l8 offset-l2">
+
+                    <div id="ffdc-logo" class="row">
+                        <a href="https://www.finastra.com/">
+                            <div id="ffdc-logo-wrapper" class="col s10 l6">
+                                <img id="ffdc-logo-img" src="https://api.fusionfabric.cloud/login/v1/resources/img/finastra-logo-rgb.png">
+                            </div>
+                        </a>
+                    </div>
+
+                    <div id="ffdc-content" class="row">
+                        <div id="ffdc-content-wrapper" class="row">
+                            <div id="ffdc-form"
+                                 class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+                                <div id="ffdc-form-wrapper" class="">
+                                    <form id="ffdc-form-login" class="form-horizontal" action="" method="post">
+                                        <div class="col s12 section">
+                                            <div class="input-field">
+                                                <input tabindex="1" id="username" class="form-control" name="username"
+                                                       value="" type="text" autofocus="" autocomplete="off">
+                                                <label for="username" class="control-label">Username or email</label>
+                                                <span class="helper-text" data-error="wrong" data-success="right">
+                                                    Please
+                                                    enter your Username or email
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col s12 section">
+                                            <div class="input-field">
+                                                <input tabindex="2" id="password" class="form-control" name="password"
+                                                       type="password" autocomplete="off">
+                                                <label for="password" class="control-label">Password</label>
+                                                <span class="helper-text" data-error="wrong" data-success="right">
+                                                    Please
+                                                    enter your password
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col s12 section">
+                                            <div class="valign-wrapper section">
+                                                <div id="ffdc-form-remember-me" class="col s6">
+                                                </div>
+
+                                                <div id="ffdc-form-buttons" class="col s6">
+                                                    <div class="right">
+                                                        <input tabindex="4" class="btn btn-primary btn-lg" name="login" id="ffdc-login" type="submit" value=" Log in ">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col s12 section">
+                                            <div id="ffdc-form-options" class="col s6">
+                                                <div class="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="ffdc-background-img-wrapper" class="col m6 l8 hide-on-small-only">
+            <div id="ffdc-background-img" class="">
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/materialize.js"></script>
+    <script src="~/js/materialize.min.js"></script>
+</body>
+
+</html>

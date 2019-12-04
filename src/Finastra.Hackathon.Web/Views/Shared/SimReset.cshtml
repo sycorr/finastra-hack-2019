@@ -1,0 +1,34 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Reset Simulator";
+}
+
+@section HeadScripts {
+    <link href="~/css/views/simReset.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/materialize.css">
+    <link rel="stylesheet" href="~/css/materialize.min.css">
+}
+
+@section FooterScripts {
+    <script src="~/js/views/simReset.js"></script>
+    <script src="~/js/views/materialize.js"></script>
+    <script src="~/js/views/materialize.min.js"></script>
+}
+
+
+
+<div class="acount-detail-page-overview-info-action">
+
+    <button mat-stroked-button="" class="mat-stroked-button mat-button-base">
+        <span class="mat-button-wrapper">Reset</span>
+        <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div>
+        <div class="mat-button-focus-overlay"></div>
+    </button>
+    <button mat-stroked-button="" class="mat-stroked-button mat-button-base">
+        <span class="mat-button-wrapper">Withhold</span>
+        <div class="mat-button-ripple mat-ripple" matripple="" ng-reflect-centered="false" ng-reflect-disabled="false" ng-reflect-trigger="[object HTMLButtonElement]"></div>
+        <div class="mat-button-focus-overlay"></div>
+    </button>
+    <mat-icon class="mat-icon notranslate material-icons mat-icon-no-color" role="img" aria-hidden="true">shopping_cart</mat-icon>
+</div>
