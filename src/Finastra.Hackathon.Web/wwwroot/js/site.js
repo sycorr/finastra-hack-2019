@@ -17,4 +17,15 @@ $(document).ready(function () {
             var route = $(this).attr('data-route');
             window.location = '/' + route;
         });
+
+    // listen for info-throbber clicks
+    $('.info-icon').popover();
+    $(document).on('click',
+        '.info-icon',
+        function () {
+
+            console.log('showing popover');
+            $(this).popover('show');
+
+        });
 });
