@@ -26,7 +26,11 @@ $(document).ready(function () {
         });
 
     // listen for info-throbber clicks
-    $('.info-icon').popover();
+    $('.info-icon').popover().on('mouseleave',
+        function () {
+            $(this).popover('hide');
+        })
+
     $(document).on('click',
         '.info-icon',
         function () {
