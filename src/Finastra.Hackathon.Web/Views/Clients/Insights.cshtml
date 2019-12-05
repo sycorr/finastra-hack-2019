@@ -11,6 +11,9 @@
 <partial name="SideBar" view-data="ViewData"></partial>
 
 <style>
+    html, body {
+        overflow-x: hidden;
+    }
     .jumbotron {
         margin-bottom: 0px;
     }
@@ -22,41 +25,41 @@
         padding: 0px;
     }
 
-        #side-panel ul li {
-            width: 100%;
-            min-height: 56px;
-            display: flex;
-            background-color: white;
-            flex-direction: row;
-            align-items: center;
-            box-sizing: border-box;
-            padding: 0 16px;
-            position: relative;
-            height: inherit;
-            border-left-width: 11px;
-            border-left-style: solid;
-            border-color: white;
-            cursor: pointer;
-        }
+    #side-panel ul li {
+        width: 100%;
+        min-height: 56px;
+        display: flex;
+        background-color: white;
+        flex-direction: row;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 16px;
+        position: relative;
+        height: inherit;
+        border-left-width: 11px;
+        border-left-style: solid;
+        border-color: white;
+        cursor: pointer;
+    }
 
-            #side-panel ul li.active {
-                color: #694ed6;
-                border-color: #694ed6;
-            }
+    #side-panel ul li.active {
+        color: #694ed6;
+        border-color: #694ed6;
+    }
 
-                #side-panel ul li.active a {
-                    color: #694ed6;
-                }
+    #side-panel ul li.active a {
+        color: #694ed6;
+    }
 
-            #side-panel ul li:hover {
-                background-color: rgba(105, 78, 214, 0.04);
-                border-color: rgba(105, 78, 214, 0.2);
-            }
+    #side-panel ul li:hover {
+        background-color: rgba(105, 78, 214, 0.04);
+        border-color: rgba(105, 78, 214, 0.2);
+    }
 
-            #side-panel ul li a {
-                text-decoration: none;
-                color: #414141;
-            }
+    #side-panel ul li a {
+        text-decoration: none;
+        color: #414141;
+    }
 
     .side-spacer {
         min-width: 32px;
