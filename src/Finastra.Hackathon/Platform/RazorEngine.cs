@@ -16,7 +16,7 @@ namespace Finastra.Hackathon.Platform
         public RazorEngine()
         {
             var emailLayoutTemplate = GetManifestResource("Finastra.Hackathon.Emails.Templates.EmailLayout.cshtml");
-            //var pdfLayoutTemplate = GetManifestResource("Finastra.Hackathon.Reports.Templates.ReportLayout.cshtml");
+            var pdfLayoutTemplate = GetManifestResource("Finastra.Hackathon.Reports.Templates.ReportLayout.cshtml");
 
             var config = new TemplateServiceConfiguration()
             {
@@ -28,7 +28,7 @@ namespace Finastra.Hackathon.Platform
             RazorEngineService = global::RazorEngine.Templating.RazorEngineService.Create(config);
 
             RazorEngineService.AddTemplate("EmailLayout", emailLayoutTemplate);
-            //RazorEngineService.AddTemplate("ReportLayout", pdfLayoutTemplate);
+            RazorEngineService.AddTemplate("ReportLayout", pdfLayoutTemplate);
         }
 
         ~RazorEngine()

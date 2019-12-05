@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using Finastra.Hackathon.Accounting;
+using Finastra.Hackathon.Finastra;
 
 namespace Finastra.Hackathon
 {
@@ -21,6 +22,8 @@ namespace Finastra.Hackathon
         public static bool LenderProposedAction { get; set; }
         public static bool AlertDismissed { get; set; }
 
+        public static AmoritizationTable ProposedAmoritizationTable { get; set; }
+
         public static void Reset()
         {
             Lender = StaticData.Lenders.First();
@@ -32,6 +35,8 @@ namespace Finastra.Hackathon
             CustomerAlteredRationAnalysis = false;
             LenderProposedAction = false;
             AlertDismissed = false;
+
+            ProposedAmoritizationTable = null;
         }
     }
 }

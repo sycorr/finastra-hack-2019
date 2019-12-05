@@ -21,11 +21,14 @@ namespace Finastra.Hackathon.Web.Controllers
         {
             SimulationConfiguration.EmailAddress = email;
             SimulationConfiguration.Lender = StaticData.Lenders.Single(x => x.Username == username);
+            SimulationConfiguration.SelectedNAIC = naic;
+
             SimulationConfiguration.SimulationStarted = true;
             SimulationConfiguration.CustomerAlteredRationAnalysis = false;
             SimulationConfiguration.LenderProposedAction = false;
             SimulationConfiguration.AlertDismissed = false;
-            SimulationConfiguration.SelectedNAIC = naic;
+
+            SimulationConfiguration.ProposedAmoritizationTable = null;
 
             return RedirectToAction("Login", "Authorization");
         }

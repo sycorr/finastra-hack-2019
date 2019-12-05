@@ -37,12 +37,6 @@ namespace Finastra.Hackathon.Web.Controllers
             return RedirectToAction("Index", "Accounts");
         }
 
-		//public async Task<IActionResult> Privacy2()
-  //      {
-  //          var bytes = new HtmlToPDFRenderer().ToPDF(null);
-  //          return File(bytes, "application/pdf", "test.pdf");
-  //      }
-		
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
