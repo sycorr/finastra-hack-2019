@@ -59,7 +59,7 @@
                         <li><i>Expectation:</i> Notice you receive a personalize, in-app alert with a new adjusted APR and a link to download the entire AM schedule via PDF.</li>
                     </ul>
                 </p>
-                
+
                 <p>
                     We invite you to make some customizations below; however, if you want to reset your session back to the defaults simply click the <i>Reset Simulation</i> button.
                 </p>
@@ -156,7 +156,7 @@
                         <div class="col-12">
                             <label for="username" class="control-label">B2C Bearer API Token (geeky stuff):</label>
                             <input tabindex="1" id="b2c" class="form-control" name="b2c"
-                                   type="text"  autocomplete="off" value="@SimulationConfiguration.B2CBearerToken">
+                                   type="text" autocomplete="off" value="@SimulationConfiguration.B2CBearerToken">
                         </div>
                     </div>
 
@@ -166,34 +166,7 @@
                             <button tabindex="4" class="lender-btn" type="submit">Let's Start!</button>
                         </div>
                     </div>
-                    
-                    
-                    <h3 style="margin-top: 75px">Credits</h3>
-                    <p>
-                        <div>
-                            Max Pool - Co-founder - Sycorr - Team Lead, Project Idea Person, Backend Development
-                        </div>
-                        <div>
-                            Medina Smith - "Solutions Consultant – Lending Community Markets" - Finastra - Subject Matter Expert, Presentation
-                        </div>
-                        <div>
-                            Bryan Swang - Senior UI/UX Engineer - Sycorr - Frontend Development, Graphic Design
-                        </div>
-                    </p>
-                    <p>
-                        Key technologies and integrations used:
-                        <ul>
-                            <li><strong>Finastra UX Kit</strong> - Provided initial web UI shell and branding standards</li>
-                            <li><strong>ASP.NET Core</strong> - Microsoft web application foundations</li>
-                            <li><strong>ML.NET</strong> - Microsoft machine learning library</li>
-                            <li><strong>Azure</strong> - Microsoft cloud hosting</li>
-                            <li><strong>Postmark</strong> - SMTP email provider</li>
-                            <li><strong>NAICs</strong> - Public database of industry codes by U.S. Census Bureau</li>
-                            <li><strong>Bootstrap</strong> - Open source web framework by Twitter</li>
-                            <li><strong>jQuery</strong> - Open source JavaScript library</li>
-                            <li><strong>FusionFabric.cloud</strong> - Financial APIs provided by Finastra</li>
-                        </ul>
-                    </p>
+
                 </form>
             </div>
             <div class="col-2"></div>
@@ -202,12 +175,80 @@
     </main>
 </div>
 
+
+<div class="w-100 credits">
+    <div class="row mb-3 mt-3 w-100 text-center">
+        <div class="col"><h3>Credits</h3></div>
+    </div>
+
+    <div class="d-inline-flex pl-2 pr-2 mb-3 w-100">
+
+        <div class="col d-flex align-items-center flex-column card p-2 mr-2 ml-2">
+            <div class="header col">
+                <span class="font-weight-bold">Max Pool</span><br />
+                Co-founder<br />
+                Sycorr<br />
+                Team Lead, Project Idea Person, Backend Development<br />
+            </div>
+            <div class="col">
+                <img src="~/img/team/20191204_203601_.jpg" alt=""/>
+            </div>
+        </div>
+
+        <div class="col d-flex align-items-center flex-column card p-2 mr-2 ml-2">
+            <div class="header col">
+                <span class="font-weight-bold">Bryan Swang</span><br />
+                Senior UI/UX Engineer<br />
+                Sycorr<br />
+                Frontend Development, Graphic Design<br />
+            </div>
+            <div class="col">
+                <img src="~/img/team/20191204_203555_.jpg" alt=""/>
+            </div>
+        </div>
+
+        <div class="col d-flex align-items-center flex-column card p-2 mr-2 ml-2">
+
+            <div class="header col">
+                <span class="font-weight-bold">Medina Smith</span><br />
+                "Solutions Consultant – Lending Community Markets"<br />
+                Finastra<br />
+                Subject Matter Expert, Presentation<br />
+            </div>
+            <div class="col">
+                <img src="~/img/team/20191204_203542_.jpg" alt=""/>
+            </div>
+
+        </div>
+    </div>
+    <div class="row mb-3 text-center">
+        <div class="col-4"></div>
+        <div class="col text-left">
+            Key technologies and integrations used:
+            <ul>
+                <li><strong>Finastra UX Kit</strong> - Provided initial web UI shell and branding standards</li>
+                <li><strong>ASP.NET Core</strong> - Microsoft web application foundations</li>
+                <li><strong>ML.NET</strong> - Microsoft machine learning library</li>
+                <li><strong>Azure</strong> - Microsoft cloud hosting</li>
+                <li><strong>Postmark</strong> - SMTP email provider</li>
+                <li><strong>NAICs</strong> - Public database of industry codes by U.S. Census Bureau</li>
+                <li><strong>Bootstrap</strong> - Open source web framework by Twitter</li>
+                <li><strong>jQuery</strong> - Open source JavaScript library</li>
+                <li><strong>FusionFabric.cloud</strong> - Financial APIs provided by Finastra</li>
+            </ul>
+
+        </div>
+        <div class="col-4"></div>
+    </div>
+
+</div>
+
 <script>
 
     $('#nav-toggle').replaceWith('<i id="login-arrow" class="fal fa-long-arrow-left" style="cursor:pointer"></i>');
 
     $('#login-arrow').on('click',
-        function() {
+        function () {
             window.location = '/';
         });
 
