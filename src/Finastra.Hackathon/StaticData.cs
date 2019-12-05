@@ -19,16 +19,16 @@ namespace Finastra.Hackathon
             {
                 new Identity()
                 {
-                    Id = "12",
-                    Username = "nsanders",
-                    Name = "Nicky Sanders",
+                    Id = "2b64c178-52ec-4c64-a776-a863c2223702",
+                    Username = "asmith",
+                    Name = "Arday Smith",
                     IsLender = true
                 },
                 new Identity()
                 {
-                    Id = "2b64c178-52ec-4c64-a776-a863c2223702",
-                    Username = "asmith",
-                    Name = "Arday Smith",
+                    Id = "12",
+                    Username = "nsanders",
+                    Name = "Nicky Sanders",
                     IsLender = true
                 },
                 new Identity()

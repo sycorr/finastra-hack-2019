@@ -15,12 +15,44 @@
         <div class="row">
             <div class="col-2"></div>
             <div class="col-8">
-                Information on how to reset here....
+                <h3>The Use Case</h3>
+                <p>
+                    Ryan Rogerson owns a canned vegetable business called <i>Peter's Pumpkin Cannery</i>.  Although he has many types of vegetables, he specializes in pumpkin meaning <strong>he sells out his inventory every holiday season</strong>.
+                </p>
+                <p>
+                    Every year he takes out a <strong>1MM operational loan</strong> with the <i>First Bank of Valkyrie</i>. He uses this loan to buy $75,000 worth of inventory every month; regardless if he needs the inventory or the price which he purchases it.
+                    Managing his inventory this way is easy for him, but has <strong>affected his bottom line</strong> dramatically and <strong>increased risk for the bank</strong>.
+                </p>
+                <p>
+                    With an increase of risk, <i>First Bank of Valkyrie</i> is trying something new with <i>Peter's Pumpkin Cannery</i>.  <strong>Underwriting has altered the loan covenants</strong> to have Ryan provide key working capital variables on a monthly basis.
+                    It is the hope of the bank that this new system will not just track, but able to make predictions that Ryan might be mismanaging his business...
+                </p>
 
+                <h3 style="margin-top: 50px">Instructions</h3>
+                <p>
+                    Obviously this application is considered prototypical; however, please note that <strong><i>this is a real, working, cloud-hosted solution with real machine learning predictions and email alerting</i></strong>.
+                </p>
+                <p>
+                    The primary demo script through the use case is as follows:
+                    <ul>
+                        <li>Login as the business owner Ryan using the username <strong>rrogerson</strong> and any password.</li>
+                        <li>Navigate to the Insights page and recognize that the the month of September is currently being predicted as numbers have not yet been entered.</li>
+                        <li>Navigate to Account Principles and notice that a call for his working capital variables appears. Some fictitious values are provided for your convenience; however, feel free to modify and submit them.</li>
+                        <li>....</li>
+                    </ul>
+                </p>
+                <p>
+                    We invite you to make some customizations below; however, if you want to reset your session back to the defaults simply click the <i>Reset Simulation</i> button.
+                </p>
+                <p class="small">
+                    <i>NOTICE: All industry averages, companies, lenders, and working capital numbers are fictitious.  Any resemblance to actual persons, living or dead, or actual businesses are purely coincidental. </i>
+                </p>
+
+                <h3 style="margin-top: 50px">Customization</h3>
                 <form id="ffdc-form-reset" action="~/Start/Set" method="post">
                     <div class="form-group row">
                         <div class="col-12">
-                            <label for="username" class="control-label">Username or Email</label>
+                            <label for="username" class="control-label">Deliver emails to:</label>
                             <input tabindex="1" id="email" class="form-control" name="email"
                                    type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.EmailAddress">
                         </div>
@@ -29,10 +61,9 @@
                         var activeLender = SimulationConfiguration.Lender;
                     }
 
-                    @(activeLender.Name)
-
-                    <div class="form-group row">
+                    <div class="form-group row mb-4">
                         <div class="col-12">
+                            Choose your commercial lender:
                             <div class="dropdown lender-menu">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="user-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <li data-username="@(activeLender.Username)" data-id="@(activeLender.Id)" data-name="@(activeLender.Name)">
@@ -69,9 +100,11 @@
                                    type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.Lender.Username">
                         </div>
                     </div>
-                    
-                    <div class="row form-group">
+
+                    <div class="row form-group mb-4">
                         <div class="col-12">
+                            Choose your industry NAIC code:
+
                             <select name="naic" class="form-control s2">
                                 @foreach (var naic in StaticData.NAIC)
                                 {
@@ -93,7 +126,22 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="form-group row mb-4">
+                        <div class="col-12">
+                            <label for="username" class="control-label">B2E Bearer API Token (geeky stuff):</label>
+                            <input tabindex="1" id="b2e" class="form-control" name="b2e"
+                                   type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.B2EBearerToken">
+                        </div>
+                    </div>
+                    <div class="form-group row mb-4">
+                        <div class="col-12">
+                            <label for="username" class="control-label">B2C Bearer API Token (geeky stuff):</label>
+                            <input tabindex="1" id="b2c" class="form-control" name="b2c"
+                                   type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.B2CBearerToken">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
                         <div class="col d-flex justify-content-between">
                             <a href="/start/reset" tabindex="4" class="lender-btn" type="">Reset Simulation</a>
                             <button tabindex="4" class="lender-btn" type="submit">Let's Start!</button>

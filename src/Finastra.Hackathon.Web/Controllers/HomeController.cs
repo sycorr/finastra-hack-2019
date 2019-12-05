@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Finastra.Hackathon.Emails;
+using Finastra.Hackathon.Finastra;
 using Finastra.Hackathon.ML;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -26,6 +27,8 @@ namespace Finastra.Hackathon.Web.Controllers
 
         public IActionResult Index()
         {
+            new FusionAPIClient().GetAmortizationAprTable();
+
             if (!HttpContext.Session.Keys.Any())
                 return RedirectToAction("Logout", "Authorization");
 

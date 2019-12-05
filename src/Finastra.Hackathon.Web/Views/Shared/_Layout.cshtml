@@ -28,9 +28,9 @@
                         <img src="/img/fbv-logo.png" style="max-height: 32px; margin-bottom: 6px;">
                     </a>
                 </div>
-                <a class="navbar-brand" href="/">
+                @*<a class="navbar-brand" href="/">
                     <div class="navbar-home-logo ml-4"></div>
-                </a>
+                </a>*@
             </div>
             @{
                 var id = Context.Session.GetString("Id");
@@ -76,7 +76,7 @@
                 </div>
             </div>
         </div>
-        <div class="blockquote" style="font-size:0.85em">It looks like you might be looking at another great selling season, so I would like to chat about how we might help you take more inventory this quarter.  If we readjust the remaining <strong>9 payments</strong> on your annual operational loan to an new <strong>@SimulationConfiguration.ProposedAmoritizationTable.APR.ToString("N2")% APR</strong> I think you might be able to improve your bottom line this year. You can view what the whole <a href="/Accounts/Loan/" style="text-decoration: underline">AM schedule</a> would like if you want.</div>
+        <div class="blockquote" style="font-size:0.85em">It looks like you might be looking at another great selling season, so I would like to chat about how we might help you take more inventory this quarter.  If we readjust the remaining <strong>@SimulationConfiguration.ProposedAmoritizationTable.Payments.Count() payments</strong> on your annual operational loan to an new <strong>@SimulationConfiguration.ProposedAmoritizationTable.APR.ToString("N2")% APR</strong> I think you might be able to improve your bottom line this year. You can view what the whole <a href="/Accounts/Loan/" style="text-decoration: underline">AM schedule</a> would like if you want.</div>
         <div class="row">
             <div class="col"><a class="lender-btn" href="/Insights/"><span class="w-100">Take me to this insight</span></a></div>
         </div>

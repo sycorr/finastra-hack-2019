@@ -1,27 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RestSharp;
 
 namespace Finastra.Hackathon.Finastra
 {
     public class FusionAPIClient
     {
-        //Fallback JSON payloads in case API fails mid-demo
-        private string _getAccountsByAccountType = "";
-        private string _balancesByAccountType = "";
-        private string _nontridMonthlyInterestAccrual = "";
-
-        private string _nontridPostData = "";
-
         public AmoritizationTable GetAmortizationAprTable()
         {
-            return new AmoritizationTable()
+            try
             {
-                AmountFinanced = 75373.12f,
-                APR = 4.321f,
-                TotalOfPayments = 76634.91f,
-                FinanceCharge = 1361.79f,
-                Payments = new List<AmoritizationTable.Payment>()
+                var body = "{\"fixedRateInstallmentFullyAmortizingRequestViewModel\": {\"calculationOptions\": {\"interestMethod\": \"_30_360\",\"endOfMonthOption\": \"SameDate\",\"finalPaymentAdjustment\": \"ApproximateEqual\",\"finalPaymentOption\": \"AdjustedToIncludeRounding\",\"interestAccrualMethod\": \"UsRule\",\"paymentRoundingOption\": \"NearestCent\",\"prepaidInterestBasis\": \"TotalNoteAmount\",\"calculateAmortizationSchedule\": \"true\"},\"loanInformation\": {\"rateInformation\": {\"interestRate\": \"4.000\"},\"loanAmount\": \"900000\",\"disbursementDate\": \"2020-01-15T00:00:00\",\"firstPaymentDate\": \"2020-02-15T00:00:00\",\"financeCharges\": {\"prepaidFinanceChargesCash\": \"100.00\",\"otherFeesCash\": \"222.00\"},\"numberOfPayments\": \"9\",\"paymentFrequency\": \"Monthly\",\"prepaidInterestOption\": \"None\"}}}";
+                var response = GetResponse("/total-lending/payment-calculator-us/v1/non-trid-monthly-interest-accrual/installment/fixed-rate", SimulationConfiguration.B2EBearerToken, body, Method.POST);
+                
+                throw new NotImplementedException();
+            }
+            catch 
+            {
+                //In the event the API fails, or the configured 
+                //AUTH CODE token TTL expires, fall back on known good
+                //API response values to safe guard the demo.
+
+                return new AmoritizationTable()
+                {
+                    AmountFinanced = 75373.12f,
+                    APR = 4.321f,
+                    TotalOfPayments = 76634.91f,
+                    FinanceCharge = 1361.79f,
+                    Payments = new List<AmoritizationTable.Payment>()
                 {
                     new AmoritizationTable.Payment()
                     {
@@ -42,38 +49,224 @@ namespace Finastra.Hackathon.Finastra
                         Principal = 8291.29f,
                         RemainingBalance = 58818.08f,
                         TotalPayment = 8514.99f
+                    },
+                    new AmoritizationTable.Payment()
+                    {
+                        DueDate = DateTime.Parse("2020-04-15T00:00:00"),
+                        Interest = 196.06f,
+                        InterestRate = 4.0f,
+                        PaymentNumber = 3,
+                        Principal = 8318.93f,
+                        RemainingBalance = 50499.15f,
+                        TotalPayment = 8514.99f
+                    },
+                    new AmoritizationTable.Payment()
+                    {
+                        DueDate = DateTime.Parse("2020-05-15T00:00:00"),
+                        Interest = 168.33f,
+                        InterestRate = 4.0f,
+                        PaymentNumber = 4,
+                        Principal = 8346.66f,
+                        RemainingBalance = 42152.49f,
+                        TotalPayment = 8514.99f
+                    },
+                    new AmoritizationTable.Payment()
+                    {
+                        DueDate = DateTime.Parse("2020-06-15T00:00:00"),
+                        Interest = 140.51f,
+                        InterestRate = 4.0f,
+                        PaymentNumber = 5,
+                        Principal = 8374.48f,
+                        RemainingBalance = 33778.01f,
+                        TotalPayment = 8514.99f
+                    },
+                    new AmoritizationTable.Payment()
+                    {
+                        DueDate = DateTime.Parse("2020-07-15T00:00:00"),
+                        Interest = 112.59f,
+                        InterestRate = 4.0f,
+                        PaymentNumber = 6,
+                        Principal = 8402.4f,
+                        RemainingBalance = 25375.61f,
+                        TotalPayment = 8514.99f
+                    },
+                    new AmoritizationTable.Payment()
+                    {
+                        DueDate = DateTime.Parse("2020-08-15T00:00:00"),
+                        Interest = 84.59f,
+                        InterestRate = 4.0f,
+                        PaymentNumber = 7,
+                        Principal = 8430.4f,
+                        RemainingBalance = 16945.21f,
+                        TotalPayment = 8514.99f
+                    },
+                    new AmoritizationTable.Payment()
+                    {
+                        DueDate = DateTime.Parse("2020-09-15T00:00:00"),
+                        Interest = 56.48f,
+                        InterestRate = 4.0f,
+                        PaymentNumber = 8,
+                        Principal = 8458.51f,
+                        RemainingBalance = 8486.7f,
+                        TotalPayment = 8514.99f
+                    },
+                    new AmoritizationTable.Payment()
+                    {
+                        DueDate = DateTime.Parse("2020-10-15T00:00:00"),
+                        Interest = 28.29f,
+                        InterestRate = 4.0f,
+                        PaymentNumber = 9,
+                        Principal = 8486.7f,
+                        RemainingBalance = 0f,
+                        TotalPayment = 8514.99f
                     }
                 }
-            };
+                };
+            }
         }
 
         public IEnumerable<Account> GetAccounts()
         {
-            var r = new Random();
-            return new List<Account>()
+            try
             {
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-                new Account() { MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(), AvailableBalance = r.Next(1000000, 5000000)},
-            };
+                var accountsResponse = GetResponse("/corporate/account-information/me/v1/accounts?accountContext=ViewAccount", SimulationConfiguration.B2CBearerToken);
+                var accountBalances = GetResponse("/corporate/account-information/me/v1/accounts/balances-by-account-type?accountTypeForBalance=CURRENT", SimulationConfiguration.B2CBearerToken);
+
+                throw new NotImplementedException();
+            }
+            catch
+            {
+                //In the event the API fails, or the configured 
+                //AUTH CODE token TTL expires, fall back on known good
+                //API response values to safe guard the demo.
+
+                var r = new Random();
+                return new List<Account>()
+                {
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                    new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
+                        AvailableBalance = r.Next(1000000, 5000000)
+                    },
+                };
+            }
+        }
+
+        private IRestResponse GetResponse(string suffix, string token, string body = null, Method method = Method.GET)
+        {
+            var baseUrl = "https://api.fusionfabric.cloud";
+
+            var client = new RestClient(baseUrl + suffix);
+            var request = new RestRequest(method);
+
+            if (!String.IsNullOrEmpty(body))
+                request.AddJsonBody(body);
+            
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("content-type", "application/x-www-form-urlencoded");
+            request.AddHeader("authorization", "Bearer " + token);
+
+            return client.Execute(request);
         }
     }
 
@@ -104,141 +297,3 @@ namespace Finastra.Hackathon.Finastra
         }
     }
 }
-
-
-//{
-//"fixedRateInstallmentFullyAmortizingRequestViewModel": {
-//    "calculationOptions": {
-//        "interestMethod": "_30_360",
-//        "endOfMonthOption": "SameDate",
-//        "finalPaymentAdjustment": "ApproximateEqual",
-//        "finalPaymentOption": "AdjustedToIncludeRounding",
-//        "interestAccrualMethod": "UsRule",
-//        "paymentRoundingOption": "NearestCent",
-//        "prepaidInterestBasis": "TotalNoteAmount",
-//        "calculateAmortizationSchedule": "true"
-//    },
-//    "loanInformation": {
-//        "rateInformation": {
-//            "interestRate": "4.000"
-//        },
-//        "loanAmount": "100000.00",
-//        "disbursementDate": "2019-04-15T00:00:00",
-//        "firstPaymentDate": "2019-05-15T00:00:00",
-//        "financeCharges": {
-//            "prepaidFinanceChargesCash": "100.00",
-//            "otherFeesCash": "222.00"
-//        },
-//        "numberOfPayments": "4",
-//        "paymentFrequency": "Monthly",
-//        "prepaidInterestOption": "None"
-//    }
-//}
-//}
-
-
-//{
-//  "Errors": [],
-//  "Apr": 4.321,
-//  "TotalOfPayments": 76634.91,
-//  "RegularPaymentAmount": 8514.99,
-//  "FinalPaymentAmount": 8514.99,
-//  "AmountFinanced": 75273.12,
-//  "FinanceCharge": 1361.79,
-//  "PrepaidInterestTotal": 0.0,
-//  "PrepaidInterestDaily": 0.0,
-//  "NumberOfDaysOfPrepaidInterest": 0,
-//  "InitialTridPayment": 8514.99,
-//  "AmortizationAprTable": [
-//    {
-//      "DueDate": "2020-02-15T00:00:00",
-//      "Interest": 251.24,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 1,
-//      "Principal": 8263.75,
-//      "RemainingBalance": 67109.37,
-//      "TotalPayment": 8514.99
-//    },
-//    {
-//      "DueDate": "2020-03-15T00:00:00",
-//      "Interest": 223.7,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 2,
-//      "Principal": 8291.29,
-//      "RemainingBalance": 58818.08,
-//      "TotalPayment": 8514.99
-//    },
-//    {
-//      "DueDate": "2020-04-15T00:00:00",
-//      "Interest": 196.06,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 3,
-//      "Principal": 8318.93,
-//      "RemainingBalance": 50499.15,
-//      "TotalPayment": 8514.99
-//    },
-//    {
-//      "DueDate": "2020-05-15T00:00:00",
-//      "Interest": 168.33,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 4,
-//      "Principal": 8346.66,
-//      "RemainingBalance": 42152.49,
-//      "TotalPayment": 8514.99
-//    },
-//    {
-//      "DueDate": "2020-06-15T00:00:00",
-//      "Interest": 140.51,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 5,
-//      "Principal": 8374.48,
-//      "RemainingBalance": 33778.01,
-//      "TotalPayment": 8514.99
-//    },
-//    {
-//      "DueDate": "2020-07-15T00:00:00",
-//      "Interest": 112.59,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 6,
-//      "Principal": 8402.4,
-//      "RemainingBalance": 25375.61,
-//      "TotalPayment": 8514.99
-//    },
-//    {
-//      "DueDate": "2020-08-15T00:00:00",
-//      "Interest": 84.59,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 7,
-//      "Principal": 8430.4,
-//      "RemainingBalance": 16945.21,
-//      "TotalPayment": 8514.99
-//    },
-//    {
-//      "DueDate": "2020-09-15T00:00:00",
-//      "Interest": 56.48,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 8,
-//      "Principal": 8458.51,
-//      "RemainingBalance": 8486.7,
-//      "TotalPayment": 8514.99
-//    },
-//    {
-//      "DueDate": "2020-10-15T00:00:00",
-//      "Interest": 28.29,
-//      "InterestRate": 4.0,
-//      "MortgageInsurance": 0.0,
-//      "PaymentNumber": 9,
-//      "Principal": 8486.7,
-//      "RemainingBalance": 0.0,
-//      "TotalPayment": 8514.99
-//    }
-//  ]
-//}
