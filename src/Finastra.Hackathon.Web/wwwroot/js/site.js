@@ -120,10 +120,13 @@ $(document).ready(function () {
 
 
     // from client/insights page
-    function proposeLoanAdjustment() {
+    $('.toast').toast({
+        delay: 4000
+    });
+    var proposeLoanAdjustment = function() {
         $.get('/authorization/proposeLoanAdjustment',
             function () {
-                console.log('done')
+                $('.toast').toast('show');
             });
     }
 
