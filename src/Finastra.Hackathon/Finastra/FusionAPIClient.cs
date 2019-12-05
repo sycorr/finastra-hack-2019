@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Newtonsoft.Json.Linq;
 using RestSharp;
 
 namespace Finastra.Hackathon.Finastra
@@ -13,8 +15,39 @@ namespace Finastra.Hackathon.Finastra
             {
                 var body = "{\"fixedRateInstallmentFullyAmortizingRequestViewModel\": {\"calculationOptions\": {\"interestMethod\": \"_30_360\",\"endOfMonthOption\": \"SameDate\",\"finalPaymentAdjustment\": \"ApproximateEqual\",\"finalPaymentOption\": \"AdjustedToIncludeRounding\",\"interestAccrualMethod\": \"UsRule\",\"paymentRoundingOption\": \"NearestCent\",\"prepaidInterestBasis\": \"TotalNoteAmount\",\"calculateAmortizationSchedule\": \"true\"},\"loanInformation\": {\"rateInformation\": {\"interestRate\": \"4.000\"},\"loanAmount\": \"900000\",\"disbursementDate\": \"2020-01-15T00:00:00\",\"firstPaymentDate\": \"2020-02-15T00:00:00\",\"financeCharges\": {\"prepaidFinanceChargesCash\": \"100.00\",\"otherFeesCash\": \"222.00\"},\"numberOfPayments\": \"9\",\"paymentFrequency\": \"Monthly\",\"prepaidInterestOption\": \"None\"}}}";
                 var response = GetResponse("/total-lending/payment-calculator-us/v1/non-trid-monthly-interest-accrual/installment/fixed-rate", SimulationConfiguration.B2EBearerToken, body, Method.POST);
-                
-                throw new NotImplementedException();
+
+                JObject o = JObject.Parse(response.Content);
+
+                var parsedResponse = new
+                    AmoritizationTable()
+                    {
+                        AmountFinanced = (float)o["AmountFinanced"],
+                        APR = (float)o["Apr"],
+                        TotalOfPayments = (float)o["TotalOfPayments"],
+                        FinanceCharge = (float)o["FinanceCharge"]
+                    };
+
+                var payments = o["AmortizationAprTable"].ToList();
+
+                var collection = new List<AmoritizationTable.Payment>();
+
+                foreach (var payment in payments)
+                {
+                    var p = new AmoritizationTable.Payment()
+                    {
+                        DueDate = (DateTime) payment["DueDate"],
+                        Interest = (float) payment["Interest"],
+                        InterestRate = (float) payment["InterestRate"],
+                        PaymentNumber = (int) payment["PaymentNumber"],
+                        Principal = (float) payment["Principal"],
+                        RemainingBalance = (float) payment["RemainingBalance"],
+                        TotalPayment = (float) payment["TotalPayment"],
+                    };
+                    collection.Add(p);
+                }
+
+                parsedResponse.Payments = collection;
+                return parsedResponse;
             }
             catch 
             {
