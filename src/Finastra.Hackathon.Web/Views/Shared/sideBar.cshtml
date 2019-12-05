@@ -1,6 +1,13 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@using Finastra.Hackathon
+@using Microsoft.AspNetCore.Http
 @{
     var key = ViewBag.Active;
+    
+    var role = Context.Session.GetString("Role");
+    var showToast = SimulationConfiguration.LenderProposedAction && !SimulationConfiguration.AlertDismissed && !String.IsNullOrEmpty(role) && !role.Equals("Lender", StringComparison.OrdinalIgnoreCase);
+    
+
+
 }
 <div id="sidebar" class="box-shadow">
     <div class="close-sidebar">
@@ -25,7 +32,7 @@
                 <div class="side-spacer noselect"><i class="fal fa-calculator-alt"></i></div><a class="noselect" href="/AccountingPrinciples">Accounting Principles</a>
             </li>
             <li data-route="insights" class="@(key.Equals("Insights") ? "active" : "")">
-                <div class="side-spacer noselect"><i class="far fa-lightbulb-dollar"></i></div><a class="noselect" href="/Insights">Insights</a>
+                <div class="side-spacer noselect"><i class="far fa-lightbulb-dollar @(showToast ? "notify" : "")"></i></div><a class="noselect" href="/Insights">Insights</a>
             </li>
         }
 
