@@ -56,9 +56,9 @@ $(document).ready(function () {
     function dismissToast() {
         $('.toast-panel').addClass('d-none');
         // ajax to save dismissed stuff
-        $.post('/toastDismissed',
+        $.get('/start/setDismissed',
             function() {
-
+                console.log('dimiss flag set')
             });
     }
 
@@ -85,7 +85,7 @@ $(document).ready(function () {
         $('#inventory-turnover-days').text((+inventoryTurnover / 360).toFixed(2));
     }
 
-    calculateInventory()
+    calculateInventory();
 
     $('#costOfGoods').on('change focus blur keyup',
         function() {
@@ -96,4 +96,8 @@ $(document).ready(function () {
         function() {
             calculateInventory();
         });
+
+    $('.mat-table tr').click(function() {
+        window.location = '/Clients/Details'
+    });
 });

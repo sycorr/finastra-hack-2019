@@ -13,11 +13,50 @@
     <main role="main" class="pb-3">
         <div class="row">
             <div class="col">
-                List of clients:
-                <ul>
-                    <li><a href="/clients/details">Peter's Pumpkin Cannery</a></li>
-                </ul>
+                <table class="mat-table" id="client-datatable" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Balance</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </main>
 </div>
+
+<script>
+
+    var accounts = [
+        {
+            "name":"Peter's Pumpkin Cannery",
+            "balance": "38,800"
+        },
+        {
+            "name": "Bob's Banana Stand",
+            "balance": "47,200"
+        },
+        {
+            "name": "Jeremy's Gnome Emporium",
+            "balance": "12,400"
+        },
+        {
+            "name": "William's Worm Farm",
+            "balance": "19,500"
+        }
+    ];
+
+    $('#client-datatable').dataTable({
+        data: accounts,
+        columns: [
+            { data: 'name' },
+            { data: 'balance' }
+        ],
+        paging: false,
+        footer: false,
+        bInfo: false,
+        searching: false,
+    });
+
+</script>

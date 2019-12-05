@@ -29,5 +29,12 @@ namespace Finastra.Hackathon.Web.Controllers
 
             return RedirectToAction("Login", "Authorization");
         }
+
+        [HttpGet]
+        public ActionResult SetDismissed()
+        {
+            SimulationConfiguration.AlertDismissed = true;
+            return Ok();
+        }
     }
 }
