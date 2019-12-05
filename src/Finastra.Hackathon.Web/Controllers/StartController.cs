@@ -17,7 +17,7 @@ namespace Finastra.Hackathon.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Set(string username, string email, Guid naic)
+        public ActionResult Set(string username, string email, Guid naic, string b2e, string b2c)
         {
             SimulationConfiguration.EmailAddress = email;
             SimulationConfiguration.Lender = StaticData.Lenders.Single(x => x.Username == username);
@@ -29,6 +29,9 @@ namespace Finastra.Hackathon.Web.Controllers
             SimulationConfiguration.AlertDismissed = false;
 
             SimulationConfiguration.ProposedAmoritizationTable = null;
+
+            SimulationConfiguration.B2CBearerToken = b2c;
+            SimulationConfiguration.B2EBearerToken = b2e;
 
             return RedirectToAction("Login", "Authorization");
         }
