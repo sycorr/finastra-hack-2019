@@ -27,6 +27,7 @@ $(document).ready(function () {
 
     // listen for info-throbber clicks
     $('.info-icon').popover();
+    $('.info-popover').popover();
     $(document).on('click',
         '.info-icon',
         function () {
@@ -82,7 +83,7 @@ $(document).ready(function () {
         var inventory = +$('#inventory').val();
         var inventoryTurnover = cogs / inventory;
         $('#inventory-turnover').text(inventoryTurnover.toFixed(2));
-        $('#inventory-turnover-days').text((+inventoryTurnover / 360).toFixed(2));
+        $('#inventory-turnover-days').text((+360/+inventoryTurnover).toFixed(2));
     }
 
     calculateInventory();

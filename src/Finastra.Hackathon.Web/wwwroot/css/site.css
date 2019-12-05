@@ -15,7 +15,7 @@ body {
 .navbar {
   flex-wrap: nowrap !important;
   background-color: white;
-  z-index: 105;
+  z-index: 4005;
   position: fixed;
   width: 100%;
 }

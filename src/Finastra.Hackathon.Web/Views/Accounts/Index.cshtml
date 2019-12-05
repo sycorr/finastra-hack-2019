@@ -18,9 +18,13 @@
 <div class="container">
     <main role="main" class="pb-3">
         <div class="row">
+            <div class="stage" style="right: 24px;">
+                <div class="info-icon pulsing noselect" data-toggle="popover" title="Sandbox Request" data-content="Please add mutable sandboxes so we can add/remove test data for use cases.  We would have loved to have had an operational loan in the API results for the authenticated user." data-placement="left">&nbsp;<img src="~/img/4.jpg" id="throbber-icon" /></div>
+            </div>
             <div class="col-5">
                 <ul class="card-list">
-                    @foreach(var account in accounts) {
+                    @foreach (var account in accounts)
+                    {
                         <li>
                             <div class="account-card">
                                 <div class="row">

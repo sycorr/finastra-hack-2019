@@ -15,7 +15,11 @@
 <div class="container">
     <main role="main" class="pb-3">
         <div class="row">
+
             <div class="col-12">
+                <div class="stage" style="right: 24px;">
+                    <div class="info-icon pulsing noselect" data-toggle="popover" title="Feature Idea" data-content="What kind of covenant information could we pull out of LaserPro to make this simplier?  What kind of industry metrics could we pull out of CreditQuest that a simple RMA subscription might not have?" data-placement="left">&nbsp;<img src="~/img/4.jpg" id="throbber-icon" /></div>
+                </div>
                 @if (SimulationConfiguration.CustomerAlteredRationAnalysis)
                 {
                     <div class="alert alert-success" role="alert">
@@ -42,18 +46,18 @@
                 <div class="col d-flex flex-column justify-content-between">
                     <div class="row">
                         <div class="col">
-                            <span>As of 12/5/2019</span>
+                            <span><strong>As of Date</strong></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <span>&nbsp;</span>
+                            <span>9/1/2019</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="col">
-                    <label for="username" class="control-label">Cost of Goods Sold</label>
+                    <label for="username" class="control-label"><strong>Cost of Goods Sold</strong></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
@@ -64,7 +68,7 @@
                 </div>
 
                 <div class="col">
-                    <label for="username" class="control-label">Inventory</label>
+                    <label for="username" class="control-label"><strong>Inventory</strong></label>
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
@@ -76,7 +80,7 @@
                 <div class="col d-flex flex-column justify-content-between">
                     <div class="row">
                         <div class="col">
-                            <span>Turnover</span>
+                            <span><strong>Turnover</strong></span>
                         </div>
                     </div>
                     <div class="row">
@@ -86,7 +90,7 @@
                 <div class="col d-flex flex-column justify-content-between">
                     <div class="row">
                         <div class="col">
-                            <span>Turnover Days</span>
+                            <span><strong>Turnover Days</strong></span>
                         </div>
                     </div>
                     <div class="row">
@@ -96,7 +100,7 @@
             </div>
 
             <div class="row mb-2">
-                <div class="col-12">
+                <div class="col-12 pt-3">
                     <button tabindex="3" class="lender-btn" type="submit">Submit</button>
                 </div>
             </div>
@@ -144,26 +148,26 @@
                                     {
                                         <tr>
                                             <td>Tax Return</td>
-                                            <td class="text-right"><a href="#">Eide_Bailly-audited_1120C-@(year).pdf</a></td>
+                                            <td class="text-right"><a href="javascript:;" class="info-popover" data-toggle="popover" title="Future Integration" data-content="Storage and retrieval of commercial financial statements/assets from an imaging system such as OnBase would be straightforward." data-placement="left">Eide_Bailly-audited_1120C-@(year).pdf</a></td>
                                         </tr>
                                     }
                                     <tr>
                                         <td>Profit & Loss (Q1)</td>
-                                        <td class="text-right"><a href="#">PL-Q1.pdf</a></td>
+                                        <td class="text-right"><a href="javascript:;" class="info-popover" data-toggle="popover" title="Future Integration" data-content="Storage and retrieval of commercial financial statements/assets from an imaging system such as OnBase would be straightforward." data-placement="left">PL-Q1.pdf</a></td>
                                     </tr>
                                     <tr>
                                         <td>Profit & Loss (Q2)</td>
-                                        <td class="text-right"><a href="#">ProfitLoss-cashbasis_Q2.pdf</a></td>
+                                        <td class="text-right"><a href="javascript:;" class="info-popover" data-toggle="popover" title="Future Integration" data-content="Storage and retrieval of commercial financial statements/assets from an imaging system such as OnBase would be straightforward." data-placement="left">ProfitLoss-cashbasis_Q2.pdf</a></td>
                                     </tr>
                                     <tr>
                                         <td>Profit & Loss (Q3)</td>
-                                        <td class="text-right"><a href="#">Profit_Loss.pdf</a></td>
+                                        <td class="text-right"><a href="javascript:;" class="info-popover" data-toggle="popover" title="Future Integration" data-content="Storage and retrieval of commercial financial statements/assets from an imaging system such as OnBase would be straightforward." data-placement="left">Profit_Loss.pdf</a></td>
                                     </tr>
                                     @if (year != 2019)
                                     {
                                         <tr>
                                             <td>Profit & Loss (Q4)</td>
-                                            <td class="text-right"><a href="#">Profit_Loss.pdf</a></td>
+                                            <td class="text-right"><a href="javascript:;" class="info-popover" data-toggle="popover" title="Future Integration" data-content="Storage and retrieval of commercial financial statements/assets from an imaging system such as OnBase would be straightforward." data-placement="left">Profit_Loss.pdf</a></td>
                                         </tr>
                                     }
                                 </tbody>
