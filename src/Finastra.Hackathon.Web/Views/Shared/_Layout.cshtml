@@ -60,7 +60,7 @@
     @{
         var lenderName = SimulationConfiguration.Lender.Name;
         var lenderId = SimulationConfiguration.Lender.Id;
-        var showToast = SimulationConfiguration.LenderProposedAction && !SimulationConfiguration.AlertDismissed && !role.Equals("Lender", StringComparison.OrdinalIgnoreCase);
+        var showToast = SimulationConfiguration.LenderProposedAction && !SimulationConfiguration.AlertDismissed && !String.IsNullOrEmpty(role) && !role.Equals("Lender", StringComparison.OrdinalIgnoreCase);
     }
            
     @if (showToast)
