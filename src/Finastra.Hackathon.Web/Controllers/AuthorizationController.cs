@@ -4,6 +4,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Finastra.Hackathon.Finastra;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +32,10 @@ namespace Finastra.Hackathon.Web.Controllers
             if (identity == null)
                 identity = StaticData.BusinessOwner;
             else
+            {
+                SimulationConfiguration.ProposedAmoritizationTable = new FusionAPIClient().GetAmortizationAprTable();
                 SimulationConfiguration.LenderProposedAction = true;
+            }
 
             HttpContext.Session.SetString("Id", identity.Id);
             HttpContext.Session.SetString("Role", identity.IsLender ? "Lender" : "Customer");

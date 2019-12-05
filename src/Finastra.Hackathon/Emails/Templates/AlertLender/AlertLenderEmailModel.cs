@@ -7,7 +7,7 @@ namespace Finastra.Hackathon.Emails.Templates.AlertLender
         public AlertLenderEmailModel()
         {
             View = "Finastra.Hackathon.Emails.Templates.AlertLender.AlertLender.cshtml";
-            Subject = "💡 Predictive analysis warning";
+            Subject = "💡  Predictive analysis warning";
             Title = "Predictive analysis warning";
         }
 

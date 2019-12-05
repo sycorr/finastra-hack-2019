@@ -7,18 +7,19 @@
   <ItemGroup>
     <None Remove="Emails\Templates\AlertLender\AlertLender.cshtml" />
     <None Remove="NAICS\2017_NAICS.csv" />
+    <None Remove="Reports\Templates\Amortization\List\AmortizationReport.cshtml" />
+    <None Remove="Reports\Templates\ReportLayout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Emails\Templates\AlertLender\AlertLender.cshtml" />
     <EmbeddedResource Include="NAICS\2017_NAICS.csv" />
+    <EmbeddedResource Include="Reports\Templates\Amortization\List\AmortizationReport.cshtml" />
+    <EmbeddedResource Include="Reports\Templates\ReportLayout.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FileHelpers" Version="3.4.1" />
-    <Compile Remove="Reports\**" />
-    <EmbeddedResource Remove="Reports\**" />
-    <None Remove="Reports\**" />
   </ItemGroup>
 
   <ItemGroup>
