@@ -1,20 +1,91 @@
-﻿@{
+﻿@using Finastra.Hackathon.Finastra
+@{
     ViewData["Title"] = "Clients";
     ViewData["Active"] = "Clients";
 }
 
 <partial name="SideBar" view-data="ViewData"></partial>
 
+<style>
+    .jumbotron {
+        margin-bottom: 0px;
+    }
+
+
+    #side-panel ul {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    #side-panel ul li {
+        width: 100%;
+        min-height: 56px;
+        display: flex;
+        background-color: white;
+        flex-direction: row;
+        align-items: center;
+        box-sizing: border-box;
+        padding: 0 16px;
+        position: relative;
+        height: inherit;
+        border-left-width: 11px;
+        border-left-style: solid;
+        border-color: white;
+        cursor: pointer;
+    }
+    #side-panel ul li.active {
+        color: #694ed6;
+        border-color: #694ed6;
+    }
+    #side-panel ul li.active a {
+        color: #694ed6;
+    }
+    #side-panel ul li:hover {
+        background-color: rgba(105, 78, 214, 0.04);
+        border-color: rgba(105, 78, 214, 0.2);
+    }
+    #side-panel ul li a {
+        text-decoration: none;
+        color: #414141;
+    }
+    
+</style>
+
+
+@{
+    var accounts = new FusionAPIClient().GetAccounts();
+}
+
+
 <div class="jumbotron fin-blue rounded-0 navpad">
     <h4>Peter's Pumpkin Cannery</h4>
 </div>
 
-<div class="container">
-    <main role="main" class="pb-3">
-        <div class="row">
-            <div class="col">
-                Account Summaries and Sidebar links for <a href="/clients/details/">this details page</a> and <a href="/clients/insights">insights</a>.
-            </div>
-        </div>
-    </main>
+<div class="row">
+    <div id="side-panel" class="col-3">
+        <ul>
+            <li class="active"><a href="/Clients/Details">Details</a></li>
+            <li><a href="/Clients/Insights">Insights</a></li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <ul class="card-list p-3">
+            @foreach(var account in accounts) {
+                <li>
+                    <div class="account-card">
+                        <div class="row">
+                            <div class="col-12 d-flex flex-column">
+                                <span>CURRENT</span>
+                                <span class="balance">@account.AvailableBalance.ToString("C2")</span>
+                            </div>
+                        </div>
+                        <div class="d-flex p-1" style="border-top: 1px solid gainsboro;">
+                            @account.MaskedAccountNumber
+                        </div>
+                    </div>
+                </li>
+            }
+
+        </ul>
+    </div>
 </div>
