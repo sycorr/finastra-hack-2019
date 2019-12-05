@@ -38,11 +38,6 @@ namespace Finastra.Hackathon.Web.Controllers
 
             if (identity == null)
                 identity = StaticData.BusinessOwner;
-            else
-            {
-                SimulationConfiguration.ProposedAmoritizationTable = new FusionAPIClient().GetAmortizationAprTable();
-                SimulationConfiguration.LenderProposedAction = true;
-            }
 
             HttpContext.Session.SetString("Id", identity.Id);
             HttpContext.Session.SetString("Role", identity.IsLender ? "Lender" : "Customer");

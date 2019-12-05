@@ -27,8 +27,6 @@ namespace Finastra.Hackathon.Web.Controllers
 
         public IActionResult Index()
         {
-            new FusionAPIClient().GetAmortizationAprTable();
-
             if (!HttpContext.Session.Keys.Any())
                 return RedirectToAction("Logout", "Authorization");
 
