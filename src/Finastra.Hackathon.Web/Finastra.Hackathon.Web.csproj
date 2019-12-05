@@ -21,7 +21,6 @@
     <Folder Include="wwwroot\fonts\font-awesome\css\" />
     <Folder Include="wwwroot\fonts\font-awesome\webfonts\" />
     <Folder Include="wwwroot\img\portraits\" />
-    <Folder Include="wwwroot\img\team\" />
   </ItemGroup>
 
   <ItemGroup>

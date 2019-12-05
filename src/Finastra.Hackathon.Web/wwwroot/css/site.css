@@ -515,27 +515,3 @@ table.mat-table tbody tr td {
   justify-content: center;
   align-items: center;
 }
-.credits .card {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  overflow: hidden;
-}
-.credits .card .font-weight-bold {
-  margin-top: 1rem;
-}
-.credits .card .header {
-  /*height: 132px;
-            min-height: 132px;*/
-  text-align: center;
-  padding-top: 1rem;
-}
-.credits .card .col {
-  text-align: center;
-}
-.credits .card img {
-  max-height: 300px;
-  max-width: 374px;
-  border-radius: 12px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
