@@ -20,6 +20,13 @@ namespace Finastra.Hackathon.Web.Controllers
             return View();
         }
 
+        public ActionResult proposeLoanAdjustment()
+        {
+            SimulationConfiguration.ProposedAmoritizationTable = new FusionAPIClient().GetAmortizationAprTable();
+            SimulationConfiguration.LenderProposedAction = true;
+            return Ok();
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {

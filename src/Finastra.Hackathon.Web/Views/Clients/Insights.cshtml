@@ -70,17 +70,26 @@
 }
 
 
-<div class="jumbotron fin-blue rounded-0 navpad">
+<div class="jumbotron fin-blue rounded-0 navpad d-flex align-items-center justify-content-between">
     <h4>Peter's Pumpkin Cannery</h4>
+    <div class="dropdown">
+        <button style="color: #673AB7;background-color: white;" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fal fa-lightbulb-dollar"></i>&nbsp;Insight Actions
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(22px, 38px, 0px);">
+            <a id="propose-loan-adj" class="dropdown-item" href="#" onclick="proposeLoanAdjustment()">Propose loan adjustment</a>
+            <a disabled class="dropdown-item disabled" href="#">Alert loan committee</a>
+        </div>
+    </div>
 </div>
 
 <div class="row">
     <div id="side-panel" class="col-3">
         <ul>
-            <li>
+            <li data-route="Clients/Details">
                 <div class="side-spacer noselect"><i class="fas fa-list"></i></div><a href="/Clients/Details">Details</a>
             </li>
-            <li class="active">
+            <li data-route="Clients/Insights" class="active">
                 <div class="side-spacer noselect"><i class="far fa-lightbulb-dollar"></i></div><a href="/Clients/Insights">Insights</a>
             </li>
         </ul>

@@ -73,12 +73,12 @@
 <div class="row">
     <div id="side-panel" class="col-3">
         <ul>
-            <li class="active "><div class="side-spacer noselect"><i class="fas fa-list"></i></div><a href="/Clients/Details">Details</a></li>
-            <li><div class="side-spacer noselect"><i class="far fa-lightbulb-dollar"></i></div><a href="/Clients/Insights">Insights</a></li>
+            <li data-route="Clients/Details" class="active "><div class="side-spacer noselect"><i class="fas fa-list"></i></div><a href="/Clients/Details">Details</a></li>
+            <li data-route="Clients/Insights"><div class="side-spacer noselect"><i class="far fa-lightbulb-dollar"></i></div><a href="/Clients/Insights">Insights</a></li>
         </ul>
     </div>
-    <div class="col-9">
-        <ul class="card-list p-3">
+    <div class="col-8">
+        <ul class="card-list pt-2">
             @foreach (var account in accounts)
             {
                 <li>
