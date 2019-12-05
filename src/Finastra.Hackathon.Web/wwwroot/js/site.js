@@ -25,8 +25,15 @@ $(document).ready(function () {
             window.location = '/' + route;
         });
 
-    // listen for info-throbber clicks
+    // listen for side-panel clicks
+    $(document).on('click',
+        '#side-panel li',
+        function () {
+            var route = $(this).attr('data-route');
+            window.location = '/' + route;
+        });
 
+    // listen for info-throbber clicks
     $('.info-popover').popover().on('mouseleave',
         function () {
             $(this).popover('hide');
@@ -110,4 +117,19 @@ $(document).ready(function () {
     $('.mat-table tr').click(function() {
         window.location = '/Clients/Details'
     });
+
+
+    // from client/insights page
+    function proposeLoanAdjustment() {
+        $.get('/authorization/proposeLoanAdjustment',
+            function () {
+                console.log('done')
+            });
+    }
+
+    $('#propose-loan-adj').click(function() {
+        proposeLoanAdjustment();
+    });
+
+
 });
