@@ -515,3 +515,13 @@ table.mat-table tbody tr td {
   justify-content: center;
   align-items: center;
 }
+.credits {
+  list-style: none;
+  padding-left: 0px;
+}
+.credits img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  padding: 1rem;
+}
