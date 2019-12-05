@@ -57,6 +57,11 @@
                 text-decoration: none;
                 color: #414141;
             }
+
+    .side-spacer {
+        min-width: 32px;
+        width: 32px;
+    }
 </style>
 
 
@@ -72,8 +77,12 @@
 <div class="row">
     <div id="side-panel" class="col-3">
         <ul>
-            <li><a href="/Clients/Details">Details</a></li>
-            <li class="active"><a href="/Clients/Insights">Insights</a></li>
+            <li>
+                <div class="side-spacer noselect"><i class="fas fa-list"></i></div><a href="/Clients/Details">Details</a>
+            </li>
+            <li class="active">
+                <div class="side-spacer noselect"><i class="far fa-lightbulb-dollar"></i></div><a href="/Clients/Insights">Insights</a>
+            </li>
         </ul>
     </div>
     <div class="col-9">
@@ -141,9 +150,9 @@
 
     Highcharts.chart({
     chart: {
-    		plotBackgroundColor: null,
-				plotBorderWidth: 0,
-				plotShadow: false,
+    	plotBackgroundColor: null,
+		plotBorderWidth: 0,
+		plotShadow: false,
         type: 'area',
         renderTo: 'chart-container'
     },
