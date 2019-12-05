@@ -33,6 +33,16 @@
                     Obviously this application is considered prototypical; however, please note that <strong><i>this is a real, working, cloud-hosted solution with real machine learning predictions and email alerting</i></strong>.
                 </p>
                 <p>
+                    Be sure to look for this icon! We have put ideas, wish lists, and questions throughout the app to enhance the integrations Finastra could provide.
+                    <div>
+                        <!-- position as needed, this is hard-coded to be centered -->
+                        <div class="stage" style="left: -50px;">
+                            <div class="info-icon pulsing noselect" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?" data-placement="bottom">&nbsp;<img src="~/img/4.jpg" id="throbber-icon" /></div>
+                        </div>
+
+                    </div>
+                </p>
+                <p>
                     The primary demo script through the use case is as follows:
                     <ul>
                         <li>Login as the business owner Ryan using the username <strong>rrogerson</strong> and any password.</li>
@@ -49,6 +59,7 @@
                         <li><i>Expectation:</i> Notice you receive a personalize, in-app alert with a new adjusted APR and a link to download the entire AM schedule via PDF.</li>
                     </ul>
                 </p>
+                
                 <p>
                     We invite you to make some customizations below; however, if you want to reset your session back to the defaults simply click the <i>Reset Simulation</i> button.
                 </p>
@@ -62,7 +73,7 @@
                         <div class="col-12">
                             <label for="username" class="control-label">Deliver emails to:</label>
                             <input tabindex="1" id="email" class="form-control" name="email"
-                                   type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.EmailAddress">
+                                   type="text" autocomplete="off" value="@SimulationConfiguration.EmailAddress">
                         </div>
                     </div>
                     @{
@@ -105,7 +116,7 @@
                         <div class="col-12">
                             <label for="username" class="control-label">Lender Username</label>
                             <input tabindex="1" id="username" class="form-control" name="username"
-                                   type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.Lender.Username">
+                                   type="text" autocomplete="off" value="@SimulationConfiguration.Lender.Username">
                         </div>
                     </div>
 
@@ -138,14 +149,14 @@
                         <div class="col-12">
                             <label for="username" class="control-label">B2E Bearer API Token (geeky stuff):</label>
                             <input tabindex="1" id="b2e" class="form-control" name="b2e"
-                                   type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.B2EBearerToken">
+                                   type="text" autocomplete="off" value="@SimulationConfiguration.B2EBearerToken">
                         </div>
                     </div>
                     <div class="form-group row mb-4">
                         <div class="col-12">
                             <label for="username" class="control-label">B2C Bearer API Token (geeky stuff):</label>
                             <input tabindex="1" id="b2c" class="form-control" name="b2c"
-                                   type="text" autofocus="" autocomplete="off" value="@SimulationConfiguration.B2CBearerToken">
+                                   type="text"  autocomplete="off" value="@SimulationConfiguration.B2CBearerToken">
                         </div>
                     </div>
 
