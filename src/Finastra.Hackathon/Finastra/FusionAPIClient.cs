@@ -162,10 +162,44 @@ namespace Finastra.Hackathon.Finastra
         {
             try
             {
-                var accountsResponse = GetResponse("/corporate/account-information/me/v1/accounts?accountContext=ViewAccount", SimulationConfiguration.B2CBearerToken);
-                var accountBalances = GetResponse("/corporate/account-information/me/v1/accounts/balances-by-account-type?accountTypeForBalance=CURRENT", SimulationConfiguration.B2CBearerToken);
+                var b2c = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhenhYOVlMYzQ1LThIOThBQXJhanZmeldhLWIycFEtcnI2c0w2dFlZZHpNIn0.eyJqdGkiOiIzMDM3ODNmMi03ZjE0LTQ0OWMtOWU0OC04NDU3MzI3YmE4NjgiLCJleHAiOjE1NzU1NzMxODQsIm5iZiI6MCwiaWF0IjoxNTc1NTY5NTg0LCJpc3MiOiJodHRwczovL2FwaS5mdXNpb25mYWJyaWMuY2xvdWQvbG9naW4vdjEiLCJhdWQiOlsiYjJjLXByb2ZpbGUtdjEtOTNhNmVmMjItMGFhNi00M2YxLTk2MjQtZjMzZWU4MDIyZTQ5IiwiY29ycG9yYXRlLXByb2ZpbGUtdjEtMWVjNjRkYTEtMDMyNC00OGJhLWJkZjYtN2Y0Njc4OTI2ZGI4IiwiY29ycG9yYXRlLWFjY291bnRlaW5mby1tZS12MS04MzFjYjA5ZC1jYzEwLTQ3NzItOGVkNS04YTZiNzJlYzhlMDEiXSwic3ViIjoiYTA2Zjc2NWUtNTRmNS00OTJhLWI0NDMtM2E3YmJjYjI5YTc2IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiYWY1NWNiNWQtZjRjMi00NWZkLTliNGEtYzBhY2ExMzdlMTUyIiwiYXV0aF90aW1lIjoxNTc1NTY5NTg0LCJzZXNzaW9uX3N0YXRlIjoiYjllNjVhMzItMzczMy00ZDljLWFmMmItOGE3MmFiMWNmM2UxIiwiYWNyIjoiMSIsInNjb3BlIjoib3BlbmlkIGNvcnBvcmF0ZS1hY2NvdW50ZWluZm8tbWUtdjEtODMxY2IwOWQtY2MxMC00NzcyLThlZDUtOGE2YjcyZWM4ZTAxIGIyYy1wcm9maWxlLXYxLTkzYTZlZjIyLTBhYTYtNDNmMS05NjI0LWYzM2VlODAyMmU0OSBjb3Jwb3JhdGUtcHJvZmlsZS12MS0xZWM2NGRhMS0wMzI0LTQ4YmEtYmRmNi03ZjQ2Nzg5MjZkYjgiLCJhcHAiOiI4ZmI1MTk3Yy1jZDk0LTQxOTMtYjUyOC0xMmE5NDNkMWJmNDAiLCJpcHdoaXRlbGlzdCI6IiIsInRlbmFudCI6InNhbmRib3giLCJ1c2VybmFtZSI6ImZmZGN1c2VyMSJ9.WJZdjOCqhPBLn1r5pT_-3sw3aeciszfxGDdEMPOMogVR3F5vI8KsvxPsE3KySAxsNSIGXYwXghy6h6o7b-O_BKYXHJb-bF50msVGs9Oouy0eelUPQEFPuiO1mCHTrimdDxLkHpvdKYwudr4eL3HoWgZAc8bnPkSetF3SqhyO92o8O-LDXa8cQvg10eAGKygbViV91hG8EVuXQ14wH0eL4hyZEOZPtmAyZmSLCT87E-EfbvCHjJ7MbXu-RaSnVTnOCK-aHKFT_1jcwZi2UmFxm1dPN-bcGTFDG4SC5_BhmSzGNLEfin6nh1y-Cry74wG-Ulgj9GLw0H3G3ClR-jCLIw";
+                var accountsResponse = GetResponse("/corporate/account-information/me/v1/accounts?accountContext=ViewAccount", b2c);
+                var accountBalances = GetResponse("/corporate/account-information/me/v1/accounts/balances-by-account-type?accountTypeForBalance=CURRENT", b2c);
+                
+                JObject o = JObject.Parse(accountsResponse.Content);
+                JObject o2 = JObject.Parse(accountBalances.Content);
+                
+                var accountResponseContent = o["items"].ToList();
+                var parsedBalancesResponse = o2["items"].ToList();
 
-                throw new NotImplementedException();
+                var returnList = new List<Account>();
+
+                foreach (var account in accountResponseContent)
+                {
+
+                    var accountNumber = (string)account["number"];
+                    var matchedBalanceList = parsedBalancesResponse.Where(x => x["id"] == account["id"]).ToList();
+                    var firstMatchedBalance = matchedBalanceList.Count > 0 ? matchedBalanceList.First() : null;
+
+                    var a = new Account()
+                    {
+                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + accountNumber.Split(null).Last(),
+                    };
+
+                    //if (firstMatchedBalance !== null)
+                    //{
+                    //    a.AvailableBalance = (float) firstMatchedBalance["availableBalance"];
+                    //}
+
+                    //else
+                    //{
+                    //    a.AvailableBalance = (float) new Random().NextDouble() * 100;
+                    //}
+
+                    returnList.Add(a);
+                }
+
+                return returnList;
             }
             catch
             {
@@ -306,7 +340,7 @@ namespace Finastra.Hackathon.Finastra
     public class Account
     {
         public string MaskedAccountNumber { get; set; }
-        public float AvailableBalance { get; set; }
+        public float AvailableBalance { get; set; } = (float)new Random().NextDouble() * 100;
     }
 
 
