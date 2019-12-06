@@ -9,6 +9,9 @@ namespace Finastra.Hackathon.Finastra
 {
     public class FusionAPIClient
     {
+        //Primary API call for both business value but also to satisfy the core requirement
+        //of the event to leverage a single API call.
+        
         public AmoritizationTable GetAmortizationAprTable()
         {
             try
@@ -158,6 +161,11 @@ namespace Finastra.Hackathon.Finastra
             }
         }
 
+
+        //These API calls are just for fun.  We use them to create a "fake"
+        //online banking experience that has no core business value
+        //to satisfying our user story.
+
         public IEnumerable<Account> GetAccounts()
         {
             try
@@ -205,82 +213,7 @@ namespace Finastra.Hackathon.Finastra
                     {
                         MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
                         AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
-                    new Account()
-                    {
-                        MaskedAccountNumber = "xxxx-xxxx-xxxx-xxx-xxxx-" + r.Next(10, 99).ToString(),
-                        AvailableBalance = r.Next(1000000, 5000000)
-                    },
+                    }
                 };
             }
         }
@@ -305,6 +238,7 @@ namespace Finastra.Hackathon.Finastra
 
     public class Account
     {
+        public string ShortId { get; set; }
         public string MaskedAccountNumber { get; set; }
         public float AvailableBalance { get; set; }
     }
