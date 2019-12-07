@@ -1,4 +1,4 @@
-#Project Valkyrie
+# Project Valkyrie
 This is the result of the Finastra Hackathon 2019 hosted in Plano, TX by the developers at Sycorr.  For full use case and demo please visit: [https://finastra-hackathon.azurewebsites.net/start](https://finastra-hackathon.azurewebsites.net/start)
 
 ## Inspiration
